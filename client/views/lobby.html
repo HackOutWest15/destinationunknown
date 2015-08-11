@@ -1,5 +1,5 @@
 <template name = 'lobby'>
-    <div class="container animated fadeIn">
+    <div class="container">
         <div class="jumbotron">
             <div class ="lobby-cards col-md-10 col-md-offset-2" >
         	
@@ -18,7 +18,7 @@
 <template name = 'gameCard'> 
  <div class="jumbotron game-card col-md-3">
                 <h3>{{gameName}}</h3>
-                playerName
+                {{playerOne.name}}
                 {{>joinButton}}
 
             </div>
