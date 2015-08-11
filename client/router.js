@@ -1,7 +1,3 @@
-if (Meteor.isClient) {
-  //Router.route('/', {template:'home'});
-
-  
   Router.route('/game', {
       template:'activeGame',
       path:'/game/:_GameId',      
@@ -16,5 +12,5 @@ if (Meteor.isClient) {
 
   Router.route('/lobby', {template:'lobby'});  
   Router.route('/', {template:'login'});    
-}
+
 

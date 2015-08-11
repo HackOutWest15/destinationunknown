@@ -1,17 +1,23 @@
 <template name = 'activeGame'>
-    <div class="container">
+    <div class="container animated fadeIn">
 		<div class="jumbotron">
 	        <div class="jumbotron player first-player col-md-4">
-                <h3>Player One</h3>
+                <h3>{{playerOne.name}}</h3>
                 Stopped at:
+                {{#if playerOne.stoppedAt}}
+                    {{playerOne.stoppedAt}} points
+                {{/if}}
             </div>
             <div class="col-md-4 now-playing"><h3>Now Playing</h3>
                 <br>
                 {{songScore}} Points
             </div>
             <div class="jumbotron player second-player col-md-4">
-                <h3>Player Two</h3>
+                <h3>{{playerTwo.name}}</h3>
                 Stopped at:
+                {{#if playerTwo.stoppedAt}}
+                    {{playerTwo.stoppedAt}} points
+                {{/if}}
             </div>
             <div class="col-md-8 col-md-offset-2">
                 <div class="progress">
@@ -23,8 +29,8 @@
             <div class="col-md-12 answer-button">
                 <button id="answerButton" class="btn btn-success btn-lg">I KNOW!</button>
             </div>
-
 	    </div>
 	</div>
     {{>answerModal}}
+
 </template>
