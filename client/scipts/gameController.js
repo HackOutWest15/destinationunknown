@@ -10,10 +10,7 @@ Template.activeGame.created = function(){
 };
 
 Template.activeGame.rendered = function() {
-
 	console.log('activeGameRendered');
-
-
 };
 
 Meteor.subscribe('games', function(){
@@ -36,3 +33,28 @@ function playSong(url) {
 	song = new Audio(url);
 	song.play();
 }
+
+Template.activeGame.events({
+    'click #answerButton': function () {
+        $("#gameModal").show();
+    },
+    'click #modalAnswer': function () {
+        var bla = $('#answerInput').val();
+        Meteor.call(checkAnswer("id", bla));
+    }
+});
+
+Template.answerModal.events({
+    'click .hide-modal' : function(){
+        $("#gameModal").hide();
+        console.log("closed");
+    },
+    'click .hide-modal' : function(){
+        $("#gameModal").hide();
+        console.log("closed");
+    },
+    'click #createGame' : function(){
+        console.log('clickcreate');
+        Router.go('game');
+    }
+});
