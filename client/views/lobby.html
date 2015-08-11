@@ -1,21 +1,37 @@
 <template name = 'lobby'>
     <div class="container animated fadeIn">
         <div class="jumbotron">
-        	<div class="jumbotron player first-player col-md-4">
-                <div class="form-group">
-                    {{>loginButtons}}
-                    <label for="sel2">Select game:</label>
-                    <select multiple class="form-control" id="sel2">
-            		
-                        {{#each gameList}}
-                        	<option>{{gameName}}</option>
-                        {{/each}}
-                        </select>
-                    </div>              	
-                </div>            
-            <form class="col-md-12 new-game">
-                <input type="text" name="text" placeholder="Game name" />
-            </form> 
+            <div class ="lobby-cards col-md-10 col-md-offset-2" >
+        	
+        		{{#each gameList}}
+                    {{>gameCard }} 
+                {{/each}}
+            </div>
+            
+            {{>createNewGameButton}}
+            {{>createGameModal}}
+            
         </div>
+    </div>
+</template>
+
+<template name = 'gameCard'> 
+ <div class="jumbotron game-card col-md-3">
+                <h3>{{gameName}}</h3>
+                playerName
+                {{>joinButton}}
+
+            </div>
+</template>
+
+<template name='createNewGameButton'>
+    <div class="col-md-12 create-button">
+        <button id="answerButton" class="btn btn-success btn-lg">Create game</button>
+    </div>
+</template>
+
+<template name='joinButton'>
+    <div class="col-md-12 join-button">
+        <button class="btn btn-success btn-lg" onclick="joinGame('{{_id}}')">Join!</button>
     </div>
 </template>
