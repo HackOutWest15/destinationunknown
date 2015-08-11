@@ -9,9 +9,12 @@
                     {{playerOne.stoppedAt}} points
                 {{/if}}
                 {{#if playerOne.guess}}
+                    <br>
                     Thought it was {{playerOne.guess}}
                 {{/if}}
-                {{#if playerOne.answer}}
+                
+                {{#if playerOne.score}}
+                    <br>
                     <h2>CORRECT!</h2>
                 {{/if}}
             </div>
@@ -26,10 +29,14 @@
 
                     {{playerTwo.stoppedAt}} points
                 {{/if}}
+
                 {{#if playerTwo.guess}}
+                    <br>
                     Thought it was {{playerTwo.guess}}
                 {{/if}}
-                {{#if playerTwo.answer}}
+
+                {{#if playerTwo.score}}
+                    <br>
                     <h2>CORRECT!</h2>
                 {{/if}}
             </div>

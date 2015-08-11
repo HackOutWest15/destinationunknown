@@ -9,9 +9,15 @@ Template.activeGame.created = function(){
         var gameId = Session.get("gameId");
         var game = Games.find({_id: gameId}).fetch()[0];
         //console.log("SessionId: " + gameId + " , Game: " + game);
+
         if(game){
-            handleSong(game);
-            updatePlayersStatus(game);
+            if(game.currentSong === -1){
+                endGame(game);
+                console.log("ENDGAME!")
+            } else {
+                handleSong(game);
+                updatePlayersStatus(game);
+            }
         }
     });
 };
@@ -49,17 +55,12 @@ function updateUI(){
 }
 
 function handleSong(game){
-    if(game.currentSong === -1){
-        endGame(game);
-        console.log("ENDGAME!")
-    } else{
-        Session.set('songIndex', game.currentSong);
-        updateUI();
-        if(song){
-            song.pause();
-        }
-        playSong(getSongURL(game));
+    Session.set('songIndex', game.currentSong);
+    updateUI();
+    if(song){
+        song.pause();
     }
+    playSong(getSongURL(game));
 }
 function getSongURL(game){
 	return game.songs[game.currentSong];
@@ -74,7 +75,7 @@ function playSong(url) {
 function updatePlayersStatus(game){
     var playerOne = game.players[0];
     var playerTwo = game.players[1];
-    console.log(playerOne);
+    console.log("we are within the updatePlayerStatus");
     if(playerOne){
         Session.set("playerOne", {name: playerOne.name, stoppedAt: playerOne.score[0] ? playerOne.score[0].stoppedAt : "",
             score: null, guess : null})
@@ -95,10 +96,12 @@ function endGame(game){
         appendString = playerOne.score[0].score > playerTwo.score[0].score ? playerOne.name + " wins!" : playerTwo.name + " wins!"
     }
     infoResult += appendString;
-    Session.set("playerOne", {name: playerOne.name, stoppedAt: playerOne.score[0] ? playerOne.score[0].stoppedAt : "",
-        score: playerOne.score[0] ? playerOne.score[0].score : null, guess: playerOne.score[0] ? playerOne.score[0].guess : null})
-    Session.set("playerTwo", {name: playerTwo.name, stoppedAt: playerTwo.score[0] ? playerTwo.score[0].stoppedAt : "",
-        score: playerTwo.score[0] ? playerTwo.score[0].score : null, guess: playerTwo.score[0] ? playerTwo.score[0].guess : null})
+    console.log("It's the end result: ---")
+    console.log(playerOne)
+    Session.set("playerOne", {name: playerOne.name, stoppedAt: playerOne.score[0].stoppedAt,
+        score: playerOne.score[0].score, guess: playerOne.score[0].guess})
+    Session.set("playerTwo", {name: playerTwo.name, stoppedAt: playerTwo.score[0].stoppedAt,
+        score: playerTwo.score[0].score, guess: playerTwo.score[0].guess})
     Session.set("infoText", infoResult);
 }
 
