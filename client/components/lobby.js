@@ -12,6 +12,7 @@ Template.lobby.events({
 	 
 	    Meteor.call("createGame", text, function(error, result) {
 	    	Meteor.call("joinGame", result);
+	    	console.log("result is: " + result);
 	    	Router.go("game", {
 		        _GameId: result	
 	        });

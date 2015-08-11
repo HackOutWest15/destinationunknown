@@ -11,8 +11,9 @@ Meteor.methods({
         });
         
         console.log(songPreviewURLs);        
-        Games.insert({gameName: gameName, currentSong: 0, players: [], songs: songPreviewURLs});
+        var id = Games.insert({gameName: gameName, currentSong: 0, players: [], songs: songPreviewURLs});
         startGame(gameName, 0);
+        return id;
     }
 });
 
