@@ -44,3 +44,28 @@ header {
     left: 50%;
 
 }
+
+.player {
+    background-color: #ffffff;
+    height: 30%;
+    overflow: hidden;
+}
+
+.first.player{
+    float: left;
+}
+
+.second-player{
+    float: right;
+}
+
+.now-playing{
+    height: 30%;
+    text-align: center;
+    margin-top: 10%;
+}
+
+.answer-button {
+    margin-top: 5%;
+    text-align: center;
+}
