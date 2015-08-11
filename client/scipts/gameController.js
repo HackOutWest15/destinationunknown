@@ -1,4 +1,5 @@
 var song;
+Session.setDefault('infoText', "Now Playing");
 Session.setDefault('songIndex', 0);
 Session.setDefault('playerOne', {name: "-", stoppedAt: ""});
 Session.setDefault('playerTwo', {name: "-", stoppedAt: ""});
@@ -26,7 +27,12 @@ Template.activeGame.helpers({
       console.log(Session.get("playerOne"))
       return Session.get("playerOne")
   },
-  playerTwo: function(){return Session.get("playerTwo")}
+  playerTwo: function(){
+      return Session.get("playerTwo")
+  },
+  infoText: function(){
+      return Session.get("infoText")
+  }
 });
 
 Template.activeGame.rendered = function() {
@@ -43,12 +49,17 @@ function updateUI(){
 }
 
 function handleSong(game){
-	Session.set('songIndex', game.currentSong);
-	updateUI();
-    if(song){
-        song.pause();
+    if(game.currentSong === -1){
+        endGame(game);
+        console.log("ENDGAME!")
+    } else{
+        Session.set('songIndex', game.currentSong);
+        updateUI();
+        if(song){
+            song.pause();
+        }
+        playSong(getSongURL(game));
     }
-    playSong(getSongURL(game));
 }
 function getSongURL(game){
 	return game.songs[game.currentSong];
@@ -70,9 +81,21 @@ function updatePlayersStatus(game){
     if(playerTwo){
         Session.set("playerTwo", {name: playerTwo.name, stoppedAt: playerTwo.score[0] ? playerTwo.score[0].stoppedAt : "" })
     }
-
-
 }
+
+function endGame(game){
+    //playerOne = game.players[0];
+    //playerTwo = game.players[1];
+    console.log("it's a TIE");
+    var infoResult = "It's a tie!";
+    /*if(playerOne.score[0].score !== playerTwo.score[0].score){
+        infoResult = playerOneScore > playerTwoScore ? playerOne.name + " wins!" : playerTwo.name + " wins!"
+    }
+    */
+    Session.set("infoText", infoResult);
+}
+
+
 
 Template.activeGame.events({
     'click #answerButton': function () {

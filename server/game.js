@@ -20,6 +20,11 @@ Meteor.methods({
 });
 
 startGame = function(gameId, i){
+        if(i===2){
+            console.log("THE GAME HAS ENDED")
+            Games.update( {_id:gameId}, { $set: {currentSong: -1} });
+            return
+        }
         if(i < 10){
           Games.update( {_id:gameId}, { $set: {currentSong: i} });
           console.log("Game " + gameId + " is now at stage " + i);

@@ -3,19 +3,21 @@
 		<div class="jumbotron">
 	        <div class="jumbotron player first-player col-md-4">
                 <h3>{{playerOne.name}}</h3>
-                Stopped at:
                 {{#if playerOne.stoppedAt}}
+                Stopped at:
+
                     {{playerOne.stoppedAt}} points
                 {{/if}}
             </div>
-            <div class="col-md-4 now-playing"><h3>Now Playing</h3>
+            <div class="col-md-4 now-playing"><h3>{{infoText}}</h3>
                 <br>
                 {{songScore}} Points
             </div>
             <div class="jumbotron player second-player col-md-4">
                 <h3>{{playerTwo.name}}</h3>
-                Stopped at:
                 {{#if playerTwo.stoppedAt}}
+                Stopped at:
+
                     {{playerTwo.stoppedAt}} points
                 {{/if}}
             </div>
