@@ -11,15 +11,16 @@ Meteor.methods({
         });
         
         console.log(songPreviewURLs);        
-        return Games.insert({gameName: gameName, currentSong: 0, players: [], songs: songPreviewURLs});
+        Games.insert({gameName: gameName, currentSong: 0, players: [], songs: songPreviewURLs});
+        startGame(gameName, 0);
     }
 });
 
 startGame = function(gameId, i){
         if(i < 10){
-          Games.update( {_id:gameId}, { $set: {currentSong: i} });
+          Games.update( {gameName:gameId}, { $set: {currentSong: i} });
           console.log("Game " + gameId + " is now at stage " + i);
-          Meteor.setTimeout(function(){startGame(gameId, i + 1);}, 30000);
+          Meteor.setTimeout(function(){startGame(gameId, i + 1);}, 10000);
         } else {
           console.log("Game " + gameId + " is finished");
         }

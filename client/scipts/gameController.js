@@ -1,4 +1,14 @@
 var song;
+Template.activeGame.created = function(){
+    this.autorun(function(){
+        console.log("autorun");
+        games = Games.find();
+        if(games.fetch()[0]){
+            handleSong(games.fetch()[0]);
+        }
+    });
+};
+
 Template.activeGame.rendered = function() {
 
 	console.log('activeGameRendered');
@@ -9,14 +19,14 @@ Template.activeGame.rendered = function() {
 Meteor.subscribe('games', function(){
     console.log("INIT!");
 
-    var game = Games.findOne();
-    if(song)
-        song.pause();
-    playSong(getSongURL(game));
 });
 
 
-
+function handleSong(game){
+    if(song)
+        song.pause();
+    playSong(getSongURL(game));
+}
 function getSongURL(game){
 	return game.songs[game.currentSong];
 }
