@@ -1,23 +1,19 @@
 if (Meteor.isClient) {
-  // counter starts at 0
-  Session.setDefault('counter', 0);
+  //Router.route('/', {template:'home'});
 
-  Template.hello.helpers({
-    counter: function () {
-      return Session.get('counter');
-    }
+  
+  Router.route('/game', {
+      template:'activeGame',
+      path:'/game/:_GameId',
+      data: function(){
+          gameData = {
+                _id : this.params._GameId
+          };
+          return gameData;
+      }
   });
+  console.log('yo');
 
-  Template.hello.events({
-    'click button': function () {
-      // increment the counter when button is clicked
-      Session.set('counter', Session.get('counter') + 1);
-    }
-  });
+  Router.route('/', {template:'startGame'});
 }
 
-if (Meteor.isServer) {
-  Meteor.startup(function () {
-    // code to run on server at startup
-  });
-}

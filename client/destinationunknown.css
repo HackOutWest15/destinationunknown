@@ -8,5 +8,36 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
+    font-family: 'Bree Serif', serif;
+}
+
+header {
+    margin-top: 0;
+    background-color: #000000;
+    color: #ffffff;
+    height: 70px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: xx-large;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+
+}
+
+.container {
+    margin-top: 75px;
+}
+
+.jumbotron{
+    background-color: rgba(220, 220, 220, 0.9);
+}
+
+#startbutton {
+    position: relative;
+    top: 50%;
+    left: 50%;
 
 }
