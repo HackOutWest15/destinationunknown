@@ -29,7 +29,7 @@ function updateCity(cityName) {
 // Returns a list of Artists (id, name) that belong to the specified city
 // ( [{name, id},{name, id} ...] )
 function getArtistsForCity(city) {
-  var result = Meteor.http.call("GET", "http://developer.echonest.com/api/v4/artist/search?api_key=" + api_key + "&format=json&artist_location="+city+"&results=10&bucket=id:spotify");
+  var result = Meteor.http.call("GET", "http://developer.echonest.com/api/v4/artist/search?api_key=" + api_key + "&format=json&artist_location="+city+"&results=10&bucket=id:spotify&bucket=familiarity");
   return result.data.response.artists;
 }
 
@@ -51,20 +51,9 @@ function getSongsForSpotifyArtistId(artistId)
   return result.data.tracks;
 }
 
-function getArtistWithFamiliarity(artistId) {
-  var result = Meteor.http.call("GET", "http://developer.echonest.com/api/v4/artist/familiarity?api_key=" + api_key + "&format=json&id="+artistId);
-  return result.data.response.artist;
-}
-
 function sortedArtists(artists) {
-  var artistWithFamiliarity = [];
-  for (var i = artists.length - 1; i >= 0; i--) {
-      var artist = getArtistWithFamiliarity(artists[i].id);
-      artists[i].familiarity = artist.familiarity;
-      artistWithFamiliarity.push(artists[i]);
-    };
-    artistWithFamiliarity.sort(function(a, b) {
+    artists.sort(function(a, b) {
       return a.familiarity - b.familiarity;
     });
-  return artistWithFamiliarity
+  return artists;
 }
