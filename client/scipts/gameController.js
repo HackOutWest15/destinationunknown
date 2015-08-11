@@ -21,7 +21,7 @@ Template.activeGame.helpers({
   	if(Session.get('songIndex') >=0){
   		return 10-Session.get('songIndex');
   	}
-  	return 10;	
+  	return 10;
   },
   playerOne: function(){
       console.log(Session.get("playerOne"))
