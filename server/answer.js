@@ -6,7 +6,7 @@ Meteor.methods({
     		return p.playerId == playerId;
     	})[0];
     	console.log("playerId: " + playerId + " currentGame: " + currentGame + " currentPlayer: " + currentPlayer);
-    	if(currentPlayer.score[0].stoppedAt == 0) {
+    	if(currentPlayer.score[0].stoppedAt == 0 && currentGame.currentSong != -1) {
     	    console.log("Made it!");
     	    answerToCheck = answerToCheck.toLowerCase().trim();
         	var correctAnswer = Answers.find({gameId: gameId, city: answerToCheck}).count() > 0;
