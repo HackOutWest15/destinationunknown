@@ -1,21 +1,12 @@
 <template name = 'activeGame'>
     <div class="container animated fadeIn">
-		<div class="jumbotron">
+		<div class="jumbotron container-fluid">
 	        <div class="jumbotron player first-player col-md-4">
                 <h3>{{playerOne.name}}</h3>
                 {{#if playerOne.stoppedAt}}
                 Stopped at:
 
                     {{playerOne.stoppedAt}} points
-                {{/if}}
-                {{#if playerOne.guess}}
-                    <br>
-                    Thought it was {{playerOne.guess}}
-                {{/if}}
-                
-                {{#if playerOne.score}}
-                    <br>
-                    <h2>CORRECT!</h2>
                 {{/if}}
             </div>
             <div class="col-md-4 now-playing"><h3>{{infoText}}</h3>
@@ -28,16 +19,6 @@
                 Stopped at:
 
                     {{playerTwo.stoppedAt}} points
-                {{/if}}
-
-                {{#if playerTwo.guess}}
-                    <br>
-                    Thought it was {{playerTwo.guess}}
-                {{/if}}
-
-                {{#if playerTwo.score}}
-                    <br>
-                    <h2>CORRECT!</h2>
                 {{/if}}
             </div>
             <div class="col-md-8 col-md-offset-2">
