@@ -1,1 +1,1 @@
-availableCities = ["Tokyo", "Berlin", "Memphis", "Seattle", "New York", "Nashville", "London"];
+availableCities = ["Tokyo", "Berlin", "Memphis", "Seattle", "New York", "Nashville", "London", "Moscow", "Havana", "Manchester", "Brsitol", "Sheffield", "Chicago", "Birmingham", "Glasgow", "Palm Desert", "Reykjavik", "Stockholm", "Berkeley", "Athens+ga", "Los Angeles", "Detroit", "Gothenburg"];
