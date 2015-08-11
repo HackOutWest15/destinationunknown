@@ -1,4 +1,5 @@
 var song;
+Session.setDefault('songIndex', 0);
 Template.activeGame.created = function(){
     this.autorun(function(){
         console.log("autorun");
@@ -9,11 +10,20 @@ Template.activeGame.created = function(){
     });
 };
 
+Template.activeGame.helpers({
+  songScore: function() {
+  	console.log("songind: "+Session.get('songIndex'))
+  	if(Session.get('songIndex') >=0){
+  		return 10-Session.get('songIndex');
+  	}
+  	return 10;	
+  }
+});
+
+
 Template.activeGame.rendered = function() {
 
 	console.log('activeGameRendered');
-
-
 };
 
 Meteor.subscribe('games', function(){
@@ -21,10 +31,16 @@ Meteor.subscribe('games', function(){
 
 });
 
+function updateUI(){
+	$('#gameProgress').css('width', (Session.get('songIndex')+1)*10+'%').attr('aria-valuenow',Session.get('songIndex'));
+}
 
 function handleSong(game){
-    if(song)
+	Session.set('songIndex', game.currentSong);
+	updateUI();
+    if(song){
         song.pause();
+    }
     playSong(getSongURL(game));
 }
 function getSongURL(game){
