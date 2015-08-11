@@ -8,6 +8,12 @@
 
                     {{playerOne.stoppedAt}} points
                 {{/if}}
+                {{#if playerOne.guess}}
+                    Thought it was {{playerOne.guess}}
+                {{/if}}
+                {{#if playerOne.answer}}
+                    <h2>CORRECT!</h2>
+                {{/if}}
             </div>
             <div class="col-md-4 now-playing"><h3>{{infoText}}</h3>
                 <br>
@@ -19,6 +25,12 @@
                 Stopped at:
 
                     {{playerTwo.stoppedAt}} points
+                {{/if}}
+                {{#if playerTwo.guess}}
+                    Thought it was {{playerTwo.guess}}
+                {{/if}}
+                {{#if playerTwo.answer}}
+                    <h2>CORRECT!</h2>
                 {{/if}}
             </div>
             <div class="col-md-8 col-md-offset-2">

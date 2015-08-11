@@ -1,8 +1,8 @@
 var song;
 Session.setDefault('infoText', "Now Playing");
 Session.setDefault('songIndex', 0);
-Session.setDefault('playerOne', {name: "-", stoppedAt: ""});
-Session.setDefault('playerTwo', {name: "-", stoppedAt: ""});
+Session.setDefault('playerOne', {name: "-", stoppedAt: "", answer: null, guess: null});
+Session.setDefault('playerTwo', {name: "-", stoppedAt: "", answer: null, guess: null});
 Template.activeGame.created = function(){
     this.autorun(function(){
         console.log("autorun");
@@ -76,22 +76,29 @@ function updatePlayersStatus(game){
     var playerTwo = game.players[1];
     console.log(playerOne);
     if(playerOne){
-        Session.set("playerOne", {name: playerOne.name, stoppedAt: playerOne.score[0] ? playerOne.score[0].stoppedAt : "" })
+        Session.set("playerOne", {name: playerOne.name, stoppedAt: playerOne.score[0] ? playerOne.score[0].stoppedAt : "",
+            score: null, guess : null})
     }
     if(playerTwo){
-        Session.set("playerTwo", {name: playerTwo.name, stoppedAt: playerTwo.score[0] ? playerTwo.score[0].stoppedAt : "" })
+        Session.set("playerTwo", {name: playerTwo.name, stoppedAt: playerTwo.score[0] ? playerTwo.score[0].stoppedAt : "",
+            score: null, guess : null})
     }
 }
 
 function endGame(game){
-    //playerOne = game.players[0];
-    //playerTwo = game.players[1];
+    playerOne = game.players[0];
+    playerTwo = game.players[1];
     console.log("it's a TIE");
-    var infoResult = "It's a tie!";
-    /*if(playerOne.score[0].score !== playerTwo.score[0].score){
-        infoResult = playerOneScore > playerTwoScore ? playerOne.name + " wins!" : playerTwo.name + " wins!"
+    var infoResult = "We were going to " + game.answer.toUpperCase() +"\n\n\n";
+    var appendString = "It's a tie!";
+    if(playerOne.score[0].score !== playerTwo.score[0].score){
+        appendString = playerOneScore > playerTwoScore ? playerOne.name + " wins!" : playerTwo.name + " wins!"
     }
-    */
+    infoResult += appendString;
+    Session.set("playerOne", {name: playerOne.name, stoppedAt: playerOne.score[0] ? playerOne.score[0].stoppedAt : "",
+        score: playerOne.score[0] ? playerOne.score[0].score : null, guess: playerOne.score[0] ? playerOne.score[0].guess : null})
+    Session.set("playerTwo", {name: playerTwo.name, stoppedAt: playerTwo.score[0] ? playerTwo.score[0].stoppedAt : "",
+        score: playerTwo.score[0] ? playerTwo.score[0].score : null, guess: playerTwo.score[0] ? playerTwo.score[0].guess : null})
     Session.set("infoText", infoResult);
 }
 
