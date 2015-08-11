@@ -1,6 +1,11 @@
 Meteor.methods({
     joinGame: function(gameId) {
-        var gameToJoin = Games.update( {_id:gameId}, { $push: {players: Meteor.userId() } });
+        Games.update( {_id:gameId}, { $push: {players: Meteor.userId() } });
+
+        var gameReady = Games.find( { _id:gameId, players: {$size: 2} } ).count();
+        if(gameReady > 0) {
+            startGame(gameId, 0);
+        }        
     }
 });
 
