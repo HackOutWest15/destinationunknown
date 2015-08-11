@@ -9,3 +9,5 @@ autopublish
 insecure
 bootstrap
 iron:router
+accounts-password
+accounts-ui
