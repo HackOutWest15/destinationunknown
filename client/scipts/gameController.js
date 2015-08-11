@@ -1,17 +1,20 @@
+var song;
 Template.activeGame.rendered = function() {
-	var song;
+
 	console.log('activeGameRendered');
 
-	Meteor.subscribe('games', function(){
-		console.log("subscribed!");
 
-		var game = Games.fetch()[0];
-		if(song)
-			song.pause();
-		this.playSong(this.getSongURL(game));
-	});
+};
 
-}
+Meteor.subscribe('games', function(){
+    console.log("INIT!");
+
+    var game = Games.findOne();
+    if(song)
+        song.pause();
+    playSong(getSongURL(game));
+});
+
 
 
 function getSongURL(game){
@@ -19,6 +22,7 @@ function getSongURL(game){
 }
 
 function playSong(url) {
+    console.log("playing songURL: "+url);
 	song = new Audio(url);
 	song.play();
 }
