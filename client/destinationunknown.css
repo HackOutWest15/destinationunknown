@@ -69,3 +69,7 @@ header {
     margin-top: 5%;
     text-align: center;
 }
+
+.modal-content {
+    height: 200px;
+}
