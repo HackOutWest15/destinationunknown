@@ -56,12 +56,14 @@ function playSong(url) {
 Template.activeGame.events({
     'click #answerButton': function () {
         $("#gameModal").show();
+        $(".container").addClass("blurred");
     },
     'click #modalAnswer': function () {
         var answer = $('#answerInput').val();
         console.log(answer);
 
         Meteor.call("checkAnswer", Session.get("gameId"), answer);
+        $(".container").removeClass("blurred");
         $("#gameModal").hide();
     }
 });
