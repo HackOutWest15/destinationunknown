@@ -22,10 +22,6 @@ Template.activeGame.helpers({
   }
 });
 
-
-Template.activeGame.rendered = function() {
-
-	console.log('activeGameRendered');
 Template.activeGame.rendered = function() {
 	console.log('activeGameRendered');
 };
@@ -80,4 +76,4 @@ Template.answerModal.events({
         console.log('clickcreate');
         Router.go('game');
     }
-})};
+});
