@@ -51,6 +51,11 @@ header {
     overflow: hidden;
 }
 
+.game-card{
+    margin: 2%;
+    background-color: white;
+}
+
 .first.player{
     float: left;
 }
@@ -58,7 +63,10 @@ header {
 .second-player{
     float: right;
 }
-
+.lobby-cards{
+    position: center;
+    overflow: hidden;
+}
 .now-playing{
     height: 30%;
     text-align: center;
@@ -69,7 +77,9 @@ header {
     margin-top: 5%;
     text-align: center;
 }
-
+.create-button {
+    text-align: center;
+}
 .modal-content {
     height: 200px;
 }
