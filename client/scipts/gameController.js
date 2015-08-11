@@ -2,9 +2,11 @@ var song;
 Template.activeGame.created = function(){
     this.autorun(function(){
         console.log("autorun");
-        games = Games.find();
-        if(games.fetch()[0]){
-            handleSong(games.fetch()[0]);
+        var gameId = Session.get("gameId");
+        var game = Games.find({_id: gameId}).fetch()[0];
+        //console.log("SessionId: " + gameId + " , Game: " + game);
+        if(game){
+            handleSong(game);
         }
     });
 };
