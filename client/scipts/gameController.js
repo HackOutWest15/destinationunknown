@@ -58,8 +58,11 @@ Template.activeGame.events({
         $("#gameModal").show();
     },
     'click #modalAnswer': function () {
-        var bla = $('#answerInput').val();
-        Meteor.call(checkAnswer("id", bla));
+        var answer = $('#answerInput').val();
+        console.log(answer);
+
+        Meteor.call("checkAnswer", Session.get("gameId"), answer);
+        $("#gameModal").hide();
     }
 });
 
