@@ -1,5 +1,5 @@
 Meteor.methods({
-    startGame: function(gameName) {
+    createGame: function(gameName) {
         var cityName = "New York";
         var city = getCity(cityName);
         var artists = getArtistsForCity(cityName).splice(0,10);
