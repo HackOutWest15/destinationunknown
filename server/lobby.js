@@ -1,6 +1,7 @@
 Meteor.methods({
     joinGame: function(gameId) {
-        var player = {playerId: Meteor.userId(), name: Meteor.user().profile.name, score: []};
+        var player = {playerId: Meteor.userId(), name: Meteor.user().profile.name, score: [
+        	{stoppedAt:0, score:0, guess:"No guess"}]};
 
         Games.update( {_id:gameId}, { $push: {players: player } });
 
