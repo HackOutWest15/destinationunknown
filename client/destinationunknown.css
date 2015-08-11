@@ -29,11 +29,14 @@ header {
 
 .container {
     margin-top: 75px;
+    height: 100%;
 }
 
 .jumbotron{
     background-color: rgba(220, 220, 220, 0.9);
+    height: 80%;
 }
+
 
 #startbutton {
     position: relative;

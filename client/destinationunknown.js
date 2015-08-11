@@ -14,6 +14,6 @@ if (Meteor.isClient) {
   });
   console.log('yo');
 
-  Router.route('/', {template:'startGame'});
+  Router.route('/', {template:'login'});
 }
 
