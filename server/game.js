@@ -12,14 +12,14 @@ Meteor.methods({
         
         console.log(songPreviewURLs);        
         var id = Games.insert({gameName: gameName, currentSong: 0, players: [], songs: songPreviewURLs});
-        startGame(gameName, 0);
+        startGame(id, 0);
         return id;
     }
 });
 
 startGame = function(gameId, i){
         if(i < 10){
-          Games.update( {gameName:gameId}, { $set: {currentSong: i} });
+          Games.update( {_id:gameId}, { $set: {currentSong: i} });
           console.log("Game " + gameId + " is now at stage " + i);
           Meteor.setTimeout(function(){startGame(gameId, i + 1);}, 10000);
         } else {
