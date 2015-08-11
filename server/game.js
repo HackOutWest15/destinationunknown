@@ -19,7 +19,7 @@ Meteor.methods({
 function startPlayList(gameName, songs, i){
         if(i < 10){
           Games.update(gameName, {
-              $set: {currentSong: songs[i]}
+              $set: {currentSong: i}
           });
           Meteor.setTimeout(function(){startPlayList(gameName, songs, i + 1);}, 30000);
         }
