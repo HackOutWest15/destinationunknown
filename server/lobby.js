@@ -1,6 +1,8 @@
 Meteor.methods({
     joinGame: function(gameId) {
-        Games.update( {_id:gameId}, { $push: {players: Meteor.userId() } });
+        var player = {playerId: Meteor.userId(), name: Meteor.user().username, score: 0};
+
+        Games.update( {_id:gameId}, { $push: {players: player } });
 
         var gameReady = Games.find( { _id:gameId, players: {$size: 2} } ).count();
         if(gameReady > 0) {
