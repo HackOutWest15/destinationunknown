@@ -1,0 +1,1 @@
+availableCities = ["Tokyo", "Berlin", "Memphis", "Seattle", "New York", "Nashville", "London"];
