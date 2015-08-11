@@ -12,7 +12,7 @@ Meteor.methods({
         });
         
         console.log(songPreviewURLs);
-        Games.insert({currentSong: 0, previews: songPreviewURLs});
+        Games.insert({currentSong: 0, songs: songPreviewURLs});
     }
 });
 
