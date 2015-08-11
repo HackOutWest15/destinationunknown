@@ -1,17 +1,23 @@
 var song;
 Session.setDefault('infoText', "Now Playing");
 Session.setDefault('songIndex', 0);
-Session.setDefault('playerOne', {name: "-", stoppedAt: ""});
-Session.setDefault('playerTwo', {name: "-", stoppedAt: ""});
+Session.setDefault('playerOne', {name: "-", stoppedAt: "", answer: null, guess: null});
+Session.setDefault('playerTwo', {name: "-", stoppedAt: "", answer: null, guess: null});
 Template.activeGame.created = function(){
     this.autorun(function(){
         console.log("autorun");
         var gameId = Session.get("gameId");
         var game = Games.find({_id: gameId}).fetch()[0];
         //console.log("SessionId: " + gameId + " , Game: " + game);
+
         if(game){
-            handleSong(game);
-            updatePlayersStatus(game);
+            if(game.currentSong === -1){
+                endGame(game);
+                console.log("ENDGAME!")
+            } else {
+                handleSong(game);
+                updatePlayersStatus(game);
+            }
         }
     });
 };
@@ -49,17 +55,12 @@ function updateUI(){
 }
 
 function handleSong(game){
-    if(game.currentSong === -1){
-        endGame(game);
-        console.log("ENDGAME!")
-    } else{
-        Session.set('songIndex', game.currentSong);
-        updateUI();
-        if(song){
-            song.pause();
-        }
-        playSong(getSongURL(game));
+    Session.set('songIndex', game.currentSong);
+    updateUI();
+    if(song){
+        song.pause();
     }
+    playSong(getSongURL(game));
 }
 function getSongURL(game){
 	return game.songs[game.currentSong];
@@ -74,24 +75,33 @@ function playSong(url) {
 function updatePlayersStatus(game){
     var playerOne = game.players[0];
     var playerTwo = game.players[1];
-    console.log(playerOne);
+    console.log("we are within the updatePlayerStatus");
     if(playerOne){
-        Session.set("playerOne", {name: playerOne.name, stoppedAt: playerOne.score[0] ? playerOne.score[0].stoppedAt : "" })
+        Session.set("playerOne", {name: playerOne.name, stoppedAt: playerOne.score[0] ? playerOne.score[0].stoppedAt : "",
+            score: null, guess : null})
     }
     if(playerTwo){
-        Session.set("playerTwo", {name: playerTwo.name, stoppedAt: playerTwo.score[0] ? playerTwo.score[0].stoppedAt : "" })
+        Session.set("playerTwo", {name: playerTwo.name, stoppedAt: playerTwo.score[0] ? playerTwo.score[0].stoppedAt : "",
+            score: null, guess : null})
     }
 }
 
 function endGame(game){
-    //playerOne = game.players[0];
-    //playerTwo = game.players[1];
+    playerOne = game.players[0];
+    playerTwo = game.players[1];
     console.log("it's a TIE");
-    var infoResult = "It's a tie!";
-    /*if(playerOne.score[0].score !== playerTwo.score[0].score){
-        infoResult = playerOneScore > playerTwoScore ? playerOne.name + " wins!" : playerTwo.name + " wins!"
+    var infoResult = "We were going to " + game.answer.toUpperCase() +"\n\n\n";
+    var appendString = "It's a tie!";
+    if(playerOne.score[0].score !== playerTwo.score[0].score){
+        appendString = playerOne.score[0].score > playerTwo.score[0].score ? playerOne.name + " wins!" : playerTwo.name + " wins!"
     }
-    */
+    infoResult += appendString;
+    console.log("It's the end result: ---")
+    console.log(playerOne)
+    Session.set("playerOne", {name: playerOne.name, stoppedAt: playerOne.score[0].stoppedAt,
+        score: playerOne.score[0].score, guess: playerOne.score[0].guess})
+    Session.set("playerTwo", {name: playerTwo.name, stoppedAt: playerTwo.score[0].stoppedAt,
+        score: playerTwo.score[0].score, guess: playerTwo.score[0].guess})
     Session.set("infoText", infoResult);
 }
 

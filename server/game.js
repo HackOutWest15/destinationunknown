@@ -19,9 +19,8 @@ Meteor.methods({
 });
 
 startGame = function(gameId, i){
-        if(i===10){
-
-            console.log("THE GAME HAS ENDED")                        
+        if(i === 10){
+            console.log("THE GAME HAS ENDED")
             var correctAnswer = Answers.find({gameId: gameId}).fetch()[0].city;
             Games.update( {_id:gameId}, { $set: {currentSong: -1, answer: correctAnswer} });
             return
