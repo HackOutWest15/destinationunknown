@@ -13,6 +13,8 @@ Meteor.methods({
         
         console.log(songPreviewURLs);        
         var id = Games.insert({gameName: gameName, currentSong: 0, players: [], songs: songPreviewURLs});
+        cityName = cityName.trim().toLowerCase();
+        Answers.insert({gameId: id, city: cityName});
         startGame(id, 0);
         return id;
     }
