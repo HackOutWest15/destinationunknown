@@ -80,4 +80,4 @@ Template.answerModal.events({
         console.log('clickcreate');
         Router.go('game');
     }
-});
+})};
