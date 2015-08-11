@@ -1,4 +1,5 @@
 var song;
+
 Meteor.subscribe('games', function(){
 
 	Games = new Collection('games');
@@ -9,11 +10,11 @@ Meteor.subscribe('games', function(){
 });
 
 
-getSongURL: function(game){
+function getSongURL(game){
 	return game.songs[game.currentSong];
 }
 
-playSongURL: function(url) {
+function playSong(url) {
 	song = new Audio(url);
 	snd.play();
 }
