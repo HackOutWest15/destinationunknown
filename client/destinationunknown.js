@@ -4,7 +4,7 @@ if (Meteor.isClient) {
   
   Router.route('/game', {
       template:'activeGame',
-      path:'/game/:_GameId',
+      path:'/game/:_GameId',      
       data: function(){
           gameData = {
                 _id : this.params._GameId
@@ -14,6 +14,7 @@ if (Meteor.isClient) {
   });
   console.log('yo');
 
-  Router.route('/', {template:'login'});
+  Router.route('/lobby', {template:'lobby'});  
+  Router.route('/', {template:'login'});    
 }
 

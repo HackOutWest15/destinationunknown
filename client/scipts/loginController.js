@@ -3,9 +3,7 @@ Template.login.rendered = function() {
         this._rendered = true;
         if(Meteor.userId()){
             console.log(Meteor.userId());
-            Router.go('game', {
-                _GameId: 'pns'
-            });
+            Router.go('lobby');
         }
     }
 }
