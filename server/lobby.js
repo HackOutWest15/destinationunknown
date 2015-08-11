@@ -6,7 +6,7 @@ Meteor.methods({
 
         var gameReady = Games.find( { _id:gameId, players: {$size: 2} } ).count();
         if(gameReady > 0) {
-            startGame(gameId, 0);
+            startGame(gameId, 0, 0);
         }        
     }
 });
