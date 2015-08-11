@@ -1,6 +1,6 @@
 Meteor.methods({
     createGame: function(gameName) {
-        var cities = shuffle(availableCities).slice([[,3]]);
+        var cities = shuffle(availableCities).slice(0, 3);
         console.log(gameName + " has answers " + cities);
         var rounds = [];
         cities.forEach(function(cityName){

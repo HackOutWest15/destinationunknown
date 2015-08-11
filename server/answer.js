@@ -9,7 +9,8 @@ Meteor.methods({
     	if(!currentPlayer.score[0]) {
     	    console.log("Made it!");
     	    answerToCheck = answerToCheck.toLowerCase().trim();
-        	var correctAnswer = Answers.find({gameId: gameId, city: answerToCheck}).count() > 0;
+            var answer = Answers.find({gameId: gameId}).fetch()[0];
+        	var correctAnswer = answerToCheck == answer.cities[currentGame.currentRound];
         	var givenScore = 10 - currentGame.currentSong;
 
         	if(correctAnswer) {
