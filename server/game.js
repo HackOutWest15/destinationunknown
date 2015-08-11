@@ -15,11 +15,12 @@ Meteor.methods({
     }
 });
 
-function startPlayList(gameName, songs, i){
+startGame = function(gameId, i){
         if(i < 10){
-          Games.update(gameName, {
-              $set: {currentSong: i}
-          });
-          Meteor.setTimeout(function(){startPlayList(gameName, songs, i + 1);}, 30000);
+          Games.update( {_id:gameId}, { $set: {currentSong: i} });
+          console.log("Game " + gameId + " is now at stage " + i);
+          Meteor.setTimeout(function(){startGame(gameId, i + 1);}, 30000);
+        } else {
+          console.log("Game " + gameId + " is finished");
         }
 }
