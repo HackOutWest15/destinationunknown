@@ -73,3 +73,13 @@ header {
 .modal-content {
     height: 200px;
 }
+.modal{
+    top: 25%;
+}
+.blurred{
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px);
+    filter: blur(5px);
+}
