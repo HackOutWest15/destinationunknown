@@ -34,7 +34,7 @@ header {
 
 .jumbotron{
     background-color: rgba(220, 220, 220, 0.9);
-    height: 80%;
+
 }
 
 
@@ -63,6 +63,15 @@ header {
 .second-player{
     float: right;
 }
+.game-card{
+    position: center;
+    overflow: hidden;
+    padding-right: 10px !important;
+    padding-left: 10px !important;
+    padding-bottom: 10px !important;
+    padding-top: 25px !important;
+
+}
 .lobby-cards{
     position: center;
     overflow: hidden;
@@ -78,6 +87,16 @@ header {
     text-align: center;
 }
 .create-button {
+    text-align: center;
+}
+.join-button {
+    text-align: center;
+    float: right;
+    float: bottom;
+    
+}
+.card-stuff-text{
+    padding-bottom: 30px;
     text-align: center;
 }
 .modal-content {

@@ -1,6 +1,6 @@
 <template name = 'lobby'>
     <div class="container">
-        <div class="jumbotron">
+        <div class="jumbotron container-fluid">
             <div class ="lobby-cards col-md-10 col-md-offset-2" >
         	
         		{{#each gameList}}
@@ -17,8 +17,10 @@
 
 <template name = 'gameCard'> 
  <div class="jumbotron game-card col-md-3">
+               <div class='card-stuff-text'>
                 <h3>{{gameName}}</h3>
                 {{gameOwner}}
+            </div>
                 {{>joinButton}}
 
             </div>
@@ -31,7 +33,5 @@
 </template>
 
 <template name='joinButton'>
-    <div class="col-md-12 join-button">
-        <button class="btn btn-success btn-lg" onclick="joinGame('{{_id}}')">Join!</button>
-    </div>
+        <button class="join-button btn btn-success btn-lg" onclick="joinGame('{{_id}}')">Join!</button>
 </template>

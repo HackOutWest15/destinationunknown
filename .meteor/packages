@@ -9,6 +9,6 @@ insecure
 iron:router
 mizzao:bootstrap-3
 
-accounts-ui
 accounts-facebook
 percolate:momentum
+accounts-ui
