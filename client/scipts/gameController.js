@@ -92,7 +92,7 @@ function endGame(game){
     var infoResult = "We were going to " + game.answer.toUpperCase() +"\n\n\n";
     var appendString = "It's a tie!";
     if(playerOne.score[0].score !== playerTwo.score[0].score){
-        appendString = playerOneScore > playerTwoScore ? playerOne.name + " wins!" : playerTwo.name + " wins!"
+        appendString = playerOne.score[0].score > playerTwo.score[0].score ? playerOne.name + " wins!" : playerTwo.name + " wins!"
     }
     infoResult += appendString;
     Session.set("playerOne", {name: playerOne.name, stoppedAt: playerOne.score[0] ? playerOne.score[0].stoppedAt : "",
