@@ -6,7 +6,7 @@ availableCities = ["Athens+ga",
 "Chicago",
 "Detroit",
 "Glasgow",
-"Gothenburg"
+"Gothenburg",
 "Havana",
 "London",
 "Los Angeles",
@@ -20,5 +20,5 @@ availableCities = ["Athens+ga",
 "Seattle",
 "Sheffield",
 "Stockholm",
-"Tokyo",
+"Tokyo"
 ];
