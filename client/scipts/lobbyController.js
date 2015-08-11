@@ -13,7 +13,9 @@ Template.lobby.events({
 	    	Meteor.call("joinGame", result);
 	    	console.log("result is: " + result);
 	    	Session.set("gameId", result);
+
 	    	console.log("GameId: " + Session.get("gameId"));
+	    	Games.find(result).playerTwo;
 	    	Router.go("game", {
 		        _GameId: result	
 	        });
@@ -24,6 +26,14 @@ Template.lobby.events({
     	console.log(JSON.stringify(this));
     }
 });
+
+Template.gameCard.helpers({
+	gameOwner: function() {
+		console.log('pl:'+this.players[0].name);
+		return this.players[0].name;
+	}
+});
+
 joinGame = function(gameId) {
 	Meteor.call("joinGame", gameId);
 	console.log("gameId is: " + gameId);
