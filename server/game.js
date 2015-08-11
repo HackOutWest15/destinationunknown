@@ -5,14 +5,13 @@ Meteor.methods({
         var artists = getArtistsForCity(cityName).splice(0,10);
         artists = appendSongDataToArtists(artists);
 
-        currentSongURL = [];
         var songPreviewURLs = [];
         artists.forEach(function(entry) {
             songPreviewURLs.push(entry.songs[0].preview_url);
         });
         
-        console.log(songPreviewURLs);
-        Games.insert({currentSong: 0, songs: songPreviewURLs});
+        console.log(songPreviewURLs);        
+        return Games.insert({gameName: gameName, currentSong: 0, players: [], songs: songPreviewURLs});
     }
 });
 
