@@ -19,7 +19,7 @@ getCity = function(cityName) {
   }
 }
 
-updateCity = function(cityName) {
+function updateCity(cityName) {
   var artists = getArtistsForCity(cityName);
   var test = sortedArtists(artists);
   test = appendSongDataToArtists(test);
@@ -28,12 +28,12 @@ updateCity = function(cityName) {
 
 // Returns a list of Artists (id, name) that belong to the specified city
 // ( [{name, id},{name, id} ...] )
-getArtistsForCity = function(city) {
+function getArtistsForCity(city) {
   var result = Meteor.http.call("GET", "http://developer.echonest.com/api/v4/artist/search?api_key=" + api_key + "&format=json&artist_location="+city+"&results=10&bucket=id:spotify");
   return result.data.response.artists;
 }
 
-appendSongDataToArtists = function(artists)
+function appendSongDataToArtists(artists)
 {
   for(i = 0; i < artists.length ; i++)
   {
@@ -45,18 +45,18 @@ appendSongDataToArtists = function(artists)
 
 // This gets the most popular tracks for a given artist. The retun data contains everything spotify knows about the track.
 // Assumption: 'Most popular' is defined as most popular in sweden.
-getSongsForSpotifyArtistId = function(artistId)
+function getSongsForSpotifyArtistId(artistId)
 {  
   var result = Meteor.http.call("GET", "https://api.spotify.com/v1/artists/"+artistId+"/top-tracks?country=SE");  
   return result.data.tracks;
 }
 
-getArtistWithFamiliarity = function(artistId) {
+function getArtistWithFamiliarity(artistId) {
   var result = Meteor.http.call("GET", "http://developer.echonest.com/api/v4/artist/familiarity?api_key=" + api_key + "&format=json&id="+artistId);
   return result.data.response.artist;
 }
 
-sortedArtists = function(artists) {
+function sortedArtists(artists) {
   var artistWithFamiliarity = [];
   for (var i = artists.length - 1; i >= 0; i--) {
       var artist = getArtistWithFamiliarity(artists[i].id);

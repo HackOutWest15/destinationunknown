@@ -3,8 +3,7 @@ Meteor.methods({
         var cityName = availableCities[Math.floor(Math.random() * availableCities.length)];
         console.log(gameName + " has answer " + cityName);
         var city = getCity(cityName);
-        var artists = getArtistsForCity(cityName).splice(0,10);
-        artists = appendSongDataToArtists(artists);
+        var artists = city.artists;
 
         var songPreviewURLs = [];
         artists.forEach(function(entry) {
