@@ -1,6 +1,7 @@
 Meteor.methods({
     createGame: function(gameName) {
-        var cityName = "New York";
+        var cityName = availableCities[Math.floor(Math.random() * availableCities.length)];
+        console.log(gameName + " has answer " + cityName);
         var city = getCity(cityName);
         var artists = getArtistsForCity(cityName).splice(0,10);
         artists = appendSongDataToArtists(artists);
