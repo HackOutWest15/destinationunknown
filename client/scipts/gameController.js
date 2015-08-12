@@ -142,7 +142,7 @@ function endGame(game){
 function showAnswerModal(){
     $("#gameModal").show();
     $(".container").addClass("blurred");
-
+    $("#answerInput")[0].focus()
 }
 
 Template.activeGame.events({
