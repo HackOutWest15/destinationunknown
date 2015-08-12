@@ -1,7 +1,7 @@
 availableCities = [
 {cityName: "Athens+ga",  wikiName:"Athens,_Georgia" },
 {cityName: "Atlanta", wikiName:"Atlanta" },
-{cityName: "Austin", wikiName:"Austin" },
+{cityName: "Austin", wikiName:"Austin,_Texas" },
 {cityName: "Berlin",  wikiName:"Berlin" },
 {cityName: "Berkeley",  wikiName:"Berkeley,_California" },
 {cityName: "Birmingham", wikiName:"Birmingham" },
