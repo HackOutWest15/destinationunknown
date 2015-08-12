@@ -9,6 +9,14 @@
 
                     {{playerOne.stoppedAt}} points
                 {{/if}}
+                {{#if playerOne.guess}}
+                    <br>
+                    Thought it was {{playerOne.guess}}
+                {{/if}}
+                {{#if playerOne.score}}
+                    <br>
+                    <h2>CORRECT!</h2>
+                {{/if}}
             </div>
             <div class="col-md-4 now-playing"><h3>{{infoText}}</h3>
                 <br>
@@ -20,6 +28,15 @@
                 Stopped at:
 
                     {{playerTwo.stoppedAt}} points
+                {{/if}}
+                {{#if playerTwo.guess}}
+                    <br>
+                    Thought it was {{playerTwo.guess}}
+                {{/if}}
+
+                {{#if playerTwo.score}}
+                    <br>
+                    <h2>CORRECT!</h2>
                 {{/if}}
             </div>
             <div class="col-md-12 text-center trivia" style="font-family: 'Shadows Into Light', cursive;">
