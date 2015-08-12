@@ -14,7 +14,7 @@ Template.lobby.rendered = function() {
 }
 
 Template.lobby.events({
-    'click #answerButton': function () {
+    'click #createNewGameButton': function () {
     	console.log("hiihi");
         $("#createModal").show();
     },
