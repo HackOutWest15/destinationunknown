@@ -125,9 +125,9 @@ function endGame(game){
         resultString = playerOne.score[0].score > playerTwo.score[0].score ? playerOne.name + " wins!" : playerTwo.name + " wins!"
     }
     Session.set("playerOne", {name: playerOne.name, stoppedAt: playerOne.score[0].stoppedAt,
-        score: playerOne.score[0].score, guess: playerOne.score[0].guess})
+        score: playerOne.score[0].score, guess: playerOne.score[0].guess.toUpperCase()})
     Session.set("playerTwo", {name: playerTwo.name, stoppedAt: playerTwo.score[0].stoppedAt,
-        score: playerTwo.score[0].score, guess: playerTwo.score[0].guess})
+        score: playerTwo.score[0].score, guess: playerTwo.score[0].guess.toUpperCase()})
     Session.set("infoText", answerString);
     Session.set("trivia", resultString);
     Session.set("artistAndSongs", game.songs);

@@ -4,9 +4,9 @@
             <div class="col-md-12 text-center"><h2>{{gameName}}</h2></div>
 	        <div class="jumbotron player first-player col-md-4">
                 <h3>{{playerOne.name}}</h3>
-                {{#if playerOne.stoppedAt}}
-                Stopped at:
 
+                Guessed at:
+                {{#if playerOne.stoppedAt}}
                     {{playerOne.stoppedAt}} points
                 {{/if}}
                 {{#if playerOne.guess}}
@@ -24,9 +24,9 @@
             </div>
             <div class="jumbotron player second-player col-md-4">
                 <h3>{{playerTwo.name}}</h3>
-                {{#if playerTwo.stoppedAt}}
-                Stopped at:
 
+                Guessed at:
+                {{#if playerTwo.stoppedAt}}
                     {{playerTwo.stoppedAt}} points
                 {{/if}}
                 {{#if playerTwo.guess}}
