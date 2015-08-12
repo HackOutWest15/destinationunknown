@@ -103,6 +103,10 @@ function endGame(game){
     Session.set("playerTwo", {name: playerTwo.name, stoppedAt: playerTwo.score[0].stoppedAt,
         score: playerTwo.score[0].score, guess: playerTwo.score[0].guess})
     Session.set("infoText", infoResult);
+    var answerButton = document.getElementById('answerButton');
+    answerButton.style.display = 'none';
+    var leaveButton = document.getElementById('leaveButton');
+    leaveButton.style.display = 'inline';
 }
 
 
@@ -137,3 +141,9 @@ Template.answerModal.events({
         Router.go('game');
     }
 });
+
+Template.activeGame.events({
+    'click #leaveButton': function () {
+        Router.go('lobby');
+    }
+})
