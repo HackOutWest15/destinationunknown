@@ -127,7 +127,7 @@ function endGame(game){
     var leaveButton = document.getElementById('leaveButton');
     leaveButton.style.display = 'inline';
     var forfeitButton = document.getElementById('forfeitButton');
-    forfeitButton.style.display = "none";
+    forfeitButton.style.display = "none"
 }
 
 function showAnswerModal(){
