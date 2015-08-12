@@ -9,6 +9,13 @@ Template.activeGame.created = function(){
     Session.setDefault('playerOne', {name: "-", stoppedAt: "", answer: null, guess: null});
     Session.setDefault('playerTwo', {name: "-", stoppedAt: "", answer: null, guess: null});
     Session.setDefault("artistAndSongs", null);
+    Session.set("gameName", "");
+    Session.set("trivia", "TRIVIA");
+    Session.set('infoText', "Now Playing");
+    Session.set('songIndex', 0);
+    Session.set('playerOne', {name: "-", stoppedAt: "", answer: null, guess: null});
+    Session.set('playerTwo', {name: "-", stoppedAt: "", answer: null, guess: null});
+    Session.set("artistAndSongs", null);
     $('body').on('keydown',function(event) {
             if(event.keyCode == 32 && $("#answerButton").is(":visible")){
                 showAnswerModal();
