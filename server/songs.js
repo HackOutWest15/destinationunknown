@@ -1,4 +1,5 @@
-getCity = function(cityName) {
+getCity = function(cityData) {
+  var cityName = cityData.cityName;
   if (Cities.find({name: cityName}).count() != 0) {
     var city = Cities.findOne({name: cityName});
     var todaysDate = new Date();
@@ -6,35 +7,41 @@ getCity = function(cityName) {
     if(updatedDate.setHours(0,0,0,0) == todaysDate.setHours(0,0,0,0)) {
       return city;
     } else {
-      var newCity = updateCity(cityName);
+      var newCity = updateCity(cityData);
       Cities.update(city._id, newCity);
       console.log("Updated city: " + cityName);
       return newCity;
     }
   } else {
-    var newCity = updateCity(cityName);
+    var newCity = updateCity(cityData);
     Cities.insert(newCity);    
     console.log("Inserted city: " + cityName);
     return newCity;
   }
 }
 
-function updateCity(cityName) {
+function updateCity(cityData) {
+  var cityName = cityData.cityName;
   var artists = getArtistsForCity(cityName);
   var test = sortedArtists(artists);
   test = appendSongDataToArtists(test);
-  var text = getTextsForCity(cityName);
+  var text = getTextsForCity(cityData);
   return {name: cityName, artists: test, texts:text, updatedDate: new Date()};
 }
 
-function getTextsForCity(cityName) {
-  var result = Meteor.http.call("GET", "https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&titles="+cityName+"");
+function getTextsForCity(cityData) {
+  var wikiName = cityData.wikiName;
+  var cityName = cityData.cityName;
+  var wikiCall = "https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&titles="+wikiName;
+  console.log("Calling: " + wikiCall);
+  var result = Meteor.http.call("GET", wikiCall);
   var jsonContent = JSON.parse(result.content);
   var keys = Object.keys(jsonContent);
   var pages = jsonContent.query.pages;
   var mypage = pages[Object.keys(pages)[0]];
   var extract = mypage.extract
   var replaced = replaceAll(cityName, "X", extract);
+  var replaced = replaceAll(wikiName, "X", replaced);
 
   var list = replaced.split(/[\n.]+/).slice(0,8).reverse();
   list.unshift("", "");  
