@@ -47,7 +47,10 @@ function getTextsForCity(cityData) {
   var list = replaced.split(/\n|(\. )/).filter(function(e) {
     return e != ". " && e != "\n";
   }).slice(0,8).reverse();
-  list.unshift("", "");  
+  
+  while(list.length < 10) {
+    list.unshift("");
+  }
 
   console.log(list);
   console.log(list.length);
