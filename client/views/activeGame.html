@@ -26,11 +26,11 @@
                 <i><h2>{{trivia}}</h2></i>
             </div>
             <div class="col-md-12 text-center trivia" >
-                <ol reversed>
+                <ol reversed class="ol-center">
                     {{#each artistAndSongs}}
-                    <li><h4>{{artist}} - {{track}}</h4> <a href="{{spotify}}" target="_blank">
+                    <li class="col-md-12"><span><h4 class="col-md-8 col-md-offset-2">{{artist}} - {{track}}</h4> <a class="col-md-2" href="{{spotify}}" target="_blank">
                         <img src="/img/listen-spotify.jpg" class="spotify-img" />
-                    </a></li>
+                    </a></span></li>
 
                     {{/each}}
                 </ol>

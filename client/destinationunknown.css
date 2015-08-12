@@ -166,6 +166,8 @@ header {
     margin-bottom: 5%;
 }
 
+.ol-center { text-align: center; list-style-position:inside;}
+
 .spotify-img{
     width:auto;
     height:auto;
