@@ -2,12 +2,21 @@
     <div class="container animated fadeIn">
 		<div class="jumbotron container-fluid">
             <div class="col-md-12 text-center"><h2>{{gameName}}</h2></div>
+            <div class="col-md-12 text-center"><h3>Where are we going?</h3></div>
 	        <div class="jumbotron player first-player col-md-4">
                 <h3>{{playerOne.name}}</h3>
-                {{#if playerOne.stoppedAt}}
-                Stopped at:
 
+                Guessed at:
+                {{#if playerOne.stoppedAt}}
                     {{playerOne.stoppedAt}} points
+                {{/if}}
+                {{#if playerOne.guess}}
+                    <br>
+                    Thought it was {{playerOne.guess}}
+                {{/if}}
+                {{#if playerOne.score}}
+                    <br>
+                    <h2>CORRECT!</h2>
                 {{/if}}
             </div>
             <div class="col-md-4 now-playing"><h3>{{infoText}}</h3>
@@ -16,21 +25,30 @@
             </div>
             <div class="jumbotron player second-player col-md-4">
                 <h3>{{playerTwo.name}}</h3>
-                {{#if playerTwo.stoppedAt}}
-                Stopped at:
 
+                Guessed at:
+                {{#if playerTwo.stoppedAt}}
                     {{playerTwo.stoppedAt}} points
+                {{/if}}
+                {{#if playerTwo.guess}}
+                    <br>
+                    Thought it was {{playerTwo.guess}}
+                {{/if}}
+
+                {{#if playerTwo.score}}
+                    <br>
+                    <h2>CORRECT!</h2>
                 {{/if}}
             </div>
             <div class="col-md-12 text-center trivia" style="font-family: 'Shadows Into Light', cursive;">
                 <i><h2>{{trivia}}</h2></i>
             </div>
             <div class="col-md-12 text-center trivia" >
-                <ol reversed>
+                <ol reversed class="ol-center">
                     {{#each artistAndSongs}}
-                    <li><h4>{{artist}} - {{track}}</h4> <a href="{{spotify}}" target="_blank">
+                    <li class="col-md-12"><span><h4 class="col-md-8 col-md-offset-2">{{artist}} - {{track}}</h4> <a class="col-md-2" href="{{spotify}}" target="_blank">
                         <img src="/img/listen-spotify.jpg" class="spotify-img" />
-                    </a></li>
+                    </a></span></li>
 
                     {{/each}}
                 </ol>

@@ -6,14 +6,16 @@
 
 <body>
     <header>
-        <div class="col-md-10"><h1 class="col-md-offset-3">
-        Destination Unknown
-        </h1></div>
+ 		{{>helpTemplate}}
+        <div class="col-md-9">	
+        	<h1 class="col-md-offset-1"> Destination Unknown</h1>
+        </div>
         <div class="header-login col-md-2">{{>loginButtons}}</div>
-        
+        {{>helpModal}}
     </header>
-
-
+    <footer id="footer" class="text-center large">
+        <h4>Powered by: <a href="http://the.echonest.com/" target="_blank">EchoNest</a> and <a href="http://spotify.com">Spotify</a></h4>
+    </footer>
 </body>
 
 

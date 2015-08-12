@@ -9,6 +9,13 @@ Template.activeGame.created = function(){
     Session.setDefault('playerOne', {name: "-", stoppedAt: "", answer: null, guess: null});
     Session.setDefault('playerTwo', {name: "-", stoppedAt: "", answer: null, guess: null});
     Session.setDefault("artistAndSongs", null);
+    Session.set("gameName", "");
+    Session.set("trivia", "TRIVIA");
+    Session.set('infoText', "Now Playing");
+    Session.set('songIndex', 0);
+    Session.set('playerOne', {name: "-", stoppedAt: "", answer: null, guess: null});
+    Session.set('playerTwo', {name: "-", stoppedAt: "", answer: null, guess: null});
+    Session.set("artistAndSongs", null);
     $('body').on('keydown',function(event) {
             if(event.keyCode == 32 && $("#answerButton").is(":visible")){
                 showAnswerModal();
@@ -118,9 +125,9 @@ function endGame(game){
         resultString = playerOne.score[0].score > playerTwo.score[0].score ? playerOne.name + " wins!" : playerTwo.name + " wins!"
     }
     Session.set("playerOne", {name: playerOne.name, stoppedAt: playerOne.score[0].stoppedAt,
-        score: playerOne.score[0].score, guess: playerOne.score[0].guess})
+        score: playerOne.score[0].score, guess: playerOne.score[0].guess.toUpperCase()})
     Session.set("playerTwo", {name: playerTwo.name, stoppedAt: playerTwo.score[0].stoppedAt,
-        score: playerTwo.score[0].score, guess: playerTwo.score[0].guess})
+        score: playerTwo.score[0].score, guess: playerTwo.score[0].guess.toUpperCase()})
     Session.set("infoText", answerString);
     Session.set("trivia", resultString);
     Session.set("artistAndSongs", game.songs);
@@ -129,13 +136,13 @@ function endGame(game){
     var leaveButton = document.getElementById('leaveButton');
     leaveButton.style.display = 'inline';
     var forfeitButton = document.getElementById('forfeitButton');
-    forfeitButton.style.display = "none";
+    forfeitButton.style.display = "none"
 }
 
 function showAnswerModal(){
     $("#gameModal").show();
     $(".container").addClass("blurred");
-
+    $("#answerInput")[0].focus()
 }
 
 Template.activeGame.events({
@@ -185,9 +192,12 @@ Template.activeGame.events({
     'click #forfeitButton': function () {
         var gameId = Session.get("gameId");
         var numberOfPlayers = Games.findOne({_id: gameId}).players.length;
+        //console.log(numberOfPlayers);
         if(numberOfPlayers < 2) {
             Router.go('/');
             Games.remove({_id: gameId});
+        } else {
+            Router.go('/');
         }
     }
 })
