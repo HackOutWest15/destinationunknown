@@ -10,6 +10,10 @@
             </div>
             
             {{>createNewGameButton}}
+
+            {{#if spinTime}}
+                {{>spinner}}
+            {{/if}}
             {{>createGameModal}}
             
         </div>
