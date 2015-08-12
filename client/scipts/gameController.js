@@ -2,6 +2,7 @@ var song;
 var currentlyPlayingUrl;
 
 Session.setDefault("gameName", "");
+Session.setDefault("trivia", "TRIVIA");
 Session.setDefault('infoText', "Now Playing");
 Session.setDefault('songIndex', 0);
 Session.setDefault('playerOne', {name: "-", stoppedAt: "", answer: null, guess: null});
@@ -54,6 +55,9 @@ Template.activeGame.helpers({
   },
   gameName: function(){
       return Session.get("gameName");
+  },
+  trivia: function(){
+      return Session.get("trivia")
   }
 });
 
@@ -80,6 +84,7 @@ function handleSong(game){
       console.log("Changing song!");
       currentlyPlayingUrl = songToPlay;
       Session.set('songIndex', game.currentSong);
+      Session.set("trivia", game.textsToShow[game.currentSong]);
       updateUI();
       if(song){
           song.pause();
@@ -115,19 +120,19 @@ function endGame(game){
     playerOne = game.players[0];
     playerTwo = game.players[1];
     console.log("it's a TIE");
-    var infoResult = "We were going to " + game.answer.toUpperCase() +"\n\n\n";
-    var appendString = "It's a tie!";
+    var answerString = "We were going to " + game.answer.toUpperCase() +"\n\n\n";
+    var resultString = "It's a tie!";
     if(playerOne.score[0].score !== playerTwo.score[0].score){
-        appendString = playerOne.score[0].score > playerTwo.score[0].score ? playerOne.name + " wins!" : playerTwo.name + " wins!"
+        resultString = playerOne.score[0].score > playerTwo.score[0].score ? playerOne.name + " wins!" : playerTwo.name + " wins!"
     }
-    infoResult += appendString;
     console.log("It's the end result: ---")
     console.log(playerOne)
     Session.set("playerOne", {name: playerOne.name, stoppedAt: playerOne.score[0].stoppedAt,
         score: playerOne.score[0].score, guess: playerOne.score[0].guess})
     Session.set("playerTwo", {name: playerTwo.name, stoppedAt: playerTwo.score[0].stoppedAt,
         score: playerTwo.score[0].score, guess: playerTwo.score[0].guess})
-    Session.set("infoText", infoResult);
+    Session.set("infoText", answerString);
+    Session.set("trivia", resultString);
     var answerButton = document.getElementById('answerButton');
     answerButton.style.display = 'none';
     var leaveButton = document.getElementById('leaveButton');
