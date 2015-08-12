@@ -14,8 +14,10 @@ Template.lobby.rendered = function() {
 }
 
 Template.lobby.events({
+    'click #closeModal': function () {
+        $("#createModal").hide();
+    },
     'click #createNewGameButton': function () {
-    	console.log("hiihi");
         $("#createModal").show();
     },
     'click #createGameName': function () {
@@ -35,10 +37,6 @@ Template.lobby.events({
 		        _GameId: result	
 	        });
 	    });
-    },
-    'click .lobby-cards': function(){
-    	console.log("dssd");
-    	console.log(JSON.stringify(this));
     }
 });
 
