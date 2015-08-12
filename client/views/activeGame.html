@@ -1,6 +1,7 @@
 <template name = 'activeGame'>
     <div class="container animated fadeIn">
 		<div class="jumbotron container-fluid">
+            <div class="col-md-12 text-center"><h2>{{gameName}}</h2></div>
 	        <div class="jumbotron player first-player col-md-4">
                 <h3>{{playerOne.name}}</h3>
                 {{#if playerOne.stoppedAt}}
@@ -20,6 +21,19 @@
 
                     {{playerTwo.stoppedAt}} points
                 {{/if}}
+            </div>
+            <div class="col-md-12 text-center trivia" style="font-family: 'Shadows Into Light', cursive;">
+                <i><h2>{{trivia}}</h2></i>
+            </div>
+            <div class="col-md-12 text-center trivia" >
+                <ol reversed>
+                    {{#each artistAndSongs}}
+                    <li><h4>{{artist}} - {{track}}</h4> <a href="{{spotify}}" target="_blank">
+                        <img src="/img/listen-spotify.jpg" class="spotify-img" />
+                    </a></li>
+
+                    {{/each}}
+                </ol>
             </div>
             <div class="col-md-8 col-md-offset-2">
                 <div class="progress">

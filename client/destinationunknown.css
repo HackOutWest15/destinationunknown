@@ -168,3 +168,16 @@ header {
 .second-player h2{
     color: green;
 }
+
+.trivia{
+    margin-bottom: 5%;
+}
+
+.spotify-img{
+    width:auto;
+    height:auto;
+    max-width:100%;
+    max-height:90%;
+    height: 30px;
+    margin-bottom: 2%;
+}
