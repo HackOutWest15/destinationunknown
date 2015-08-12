@@ -1,4 +1,6 @@
 var song;
+var currentlyPlayingUrl;
+
 Session.setDefault('infoText', "Now Playing");
 Session.setDefault('songIndex', 0);
 Session.setDefault('playerOne', {name: "-", stoppedAt: "", answer: null, guess: null});
@@ -55,12 +57,20 @@ function updateUI(){
 }
 
 function handleSong(game){
-    Session.set('songIndex', game.currentSong);
-    updateUI();
-    if(song){
-        song.pause();
+    var songToPlay = getSongURL(game);
+
+    //Don't restart the song if it's still the same song!
+    console.log(songToPlay + " vs " + currentlyPlayingUrl);
+    if(songToPlay != currentlyPlayingUrl) {
+      console.log("Changing song!");
+      currentlyPlayingUrl = songToPlay;
+      Session.set('songIndex', game.currentSong);
+      updateUI();
+      if(song){
+          song.pause();
+      }
+      playSong(getSongURL(game));
     }
-    playSong(getSongURL(game));
 }
 function getSongURL(game){
 	return game.songs[game.currentSong];
