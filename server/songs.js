@@ -40,10 +40,13 @@ function getTextsForCity(cityData) {
   var pages = jsonContent.query.pages;
   var mypage = pages[Object.keys(pages)[0]];
   var extract = mypage.extract
+  extract = replaceAll("U.S.", "U.S", extract);
   var replaced = replaceAll(cityName, "X", extract);
   var replaced = replaceAll(wikiName, "X", replaced);
 
-  var list = replaced.split(/[\n.]+/).slice(0,8).reverse();
+  var list = replaced.split(/\n|(\. )/).filter(function(e) {
+    return e != ". " && e != "\n";
+  }).slice(0,8).reverse();
   list.unshift("", "");  
 
   console.log(list);

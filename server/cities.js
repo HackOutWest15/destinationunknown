@@ -20,7 +20,7 @@ availableCities = [
 {cityName: "Moscow", wikiName:"Moscow" },
 {cityName: "Nashville", wikiName:"Nashville" },
 {cityName: "New Orleans", wikiName:"New_Orleans" },
-{cityName: "New York", wikiName:"New" },
+{cityName: "New York", wikiName:"New_York" },
 {cityName: "Oslo", wikiName:"Oslo" },
 {cityName: "Palm Desert", wikiName:"Palm_Desert" },
 {cityName: "Paris", wikiName:"Paris" },
@@ -33,4 +33,4 @@ availableCities = [
 {cityName: "Tokyo", wikiName:"Tokyo" }
 ];
 
-//availableCities = [ "London" ];
+//availableCities = [ {cityName: "Charlotte", wikiName:"Charlotte,_North_Carolina" }, ];
