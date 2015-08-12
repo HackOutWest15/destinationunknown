@@ -179,7 +179,7 @@ Template.answerModal.events({
 
 Template.activeGame.events({
     'click #leaveButton': function () {
-        Router.go('lobby');
+        Router.go('/');
     }
 });
 
@@ -188,7 +188,7 @@ Template.activeGame.events({
         var gameId = Session.get("gameId");
         var numberOfPlayers = Games.findOne({_id: gameId}).players.length;
         if(numberOfPlayers < 2) {
-            Router.go('lobby');
+            Router.go('/');
             Games.remove({_id: gameId});
         }
     }
