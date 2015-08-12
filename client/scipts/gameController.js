@@ -1,6 +1,7 @@
 var song;
 var currentlyPlayingUrl;
 
+Session.setDefault("gameName", "");
 Session.setDefault('infoText', "Now Playing");
 Session.setDefault('songIndex', 0);
 Session.setDefault('playerOne', {name: "-", stoppedAt: "", answer: null, guess: null});
@@ -18,9 +19,11 @@ Template.activeGame.created = function(){
         console.log("autorun");
         var gameId = Session.get("gameId");
         var game = Games.find({_id: gameId}).fetch()[0];
+
         //console.log("SessionId: " + gameId + " , Game: " + game);
 
         if(game){
+            Session.set("gameName", game.gameName.toUpperCase());
             if(game.currentSong === -1){
                 endGame(game);
                 console.log("ENDGAME!")
@@ -48,6 +51,9 @@ Template.activeGame.helpers({
   },
   infoText: function(){
       return Session.get("infoText")
+  },
+  gameName: function(){
+      return Session.get("gameName");
   }
 });
 

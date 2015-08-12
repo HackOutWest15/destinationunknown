@@ -1,6 +1,7 @@
 <template name = 'activeGame'>
     <div class="container animated fadeIn">
 		<div class="jumbotron container-fluid">
+            <div class="col-md-12 text-center"><h2>{{gameName}}</h2></div>
 	        <div class="jumbotron player first-player col-md-4">
                 <h3>{{playerOne.name}}</h3>
                 {{#if playerOne.stoppedAt}}
