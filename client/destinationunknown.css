@@ -183,3 +183,9 @@ header {
     height: 30px;
     margin-bottom: 2%;
 }
+
+#helpButton{
+    background-color: #000;
+    border-color: black;
+    color: white;
+}
