@@ -35,4 +35,4 @@ availableCities = [
 {cityName: "Tokyo", wikiName:"Tokyo" }
 ];
 
-//availableCities = [ {cityName: "Borlange", wikiName:"Borlänge" },];
+//availableCities = [{cityName: "Nashville", wikiName:"Nashville,_Tennessee" },];
