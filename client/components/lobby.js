@@ -1,6 +1,9 @@
 Template.lobby.helpers({
 	gameList: function () {
-      return Games.find({players: {$size: 1}})
+        if (Meteor.userId()) {
+            return Games.find({players: {$size: 1}});
+        };
+        return [];
     }
   });
 
