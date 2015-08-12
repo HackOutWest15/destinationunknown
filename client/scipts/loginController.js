@@ -6,4 +6,12 @@ Template.login.rendered = function() {
             Router.go('lobby');
         }
     }
+    //new untested and stronk
+    this.autorun(function(){
+        console.log("autorun2");
+        if(Meteor.userId() && !Meteor.loggingIn()){
+            console.log(Meteor.userId());
+            Router.go('lobby');
+        }
+    });
 }
