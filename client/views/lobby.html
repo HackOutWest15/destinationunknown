@@ -1,7 +1,8 @@
 <template name = 'lobby'>
     <div class="container">
         <div class="jumbotron container-fluid">
-            <div class ="lobby-cards col-md-10 col-md-offset-2" >
+            {{>welcomeScreen}}
+            <div class ="lobby-cards col-md-12 col-md-offset-1" >
         	
         		{{#each gameList}}
                     {{>gameCard }} 
@@ -35,3 +36,11 @@
 <template name='joinButton'>
         <button class="join-button btn btn-success btn-lg" onclick="joinGame('{{_id}}')">Join!</button>
 </template>
+
+<template name="welcomeScreen"> 
+    <div id="welcome-text" style="text-align: center;">
+        <h3>Welcome to Destination Unknown!</h3>
+        <p>Sign in to see available games or create a new game.</p>
+    </div>
+</template>
+

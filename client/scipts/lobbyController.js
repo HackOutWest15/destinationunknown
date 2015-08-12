@@ -5,8 +5,10 @@ Template.lobby.rendered = function() {
         if(Meteor.userId() && !Meteor.loggingIn()){
             console.log(Meteor.userId());
             $("#createNewGameButton").show();
+            $("#welcome-text").hide();
         } else {
             $("#createNewGameButton").hide();
+            $("#welcome-text").show();
         }
     });
 }
