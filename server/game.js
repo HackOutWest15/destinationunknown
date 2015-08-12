@@ -11,7 +11,7 @@ Meteor.methods({
         });
         
         console.log(songPreviewURLs);        
-        var id = Games.insert({gameName: gameName, currentSong: 0, players: [], songs: songPreviewURLs, answer: "..."});
+        var id = Games.insert({gameName: gameName, currentSong: 0, players: [], songs: songPreviewURLs, answer: "...", gameStarted:false});
         cityName = cityName.trim().toLowerCase();
         Answers.insert({gameId: id, city: cityName});        
         return id;
@@ -19,8 +19,12 @@ Meteor.methods({
 });
 
 startGame = function(gameId, i){
+        if(i === 0) {
+            console.log("The game is commencing");
+            Games.update( {_id:gameId}, { $set: {gameStarted: true} });
+        }
         if(i === 10){
-            console.log("THE GAME HAS ENDED")
+            console.log("THE game has ended");
             var correctAnswer = Answers.find({gameId: gameId}).fetch()[0].city;
             Games.update( {_id:gameId}, { $set: {currentSong: -1, answer: correctAnswer} });
             return

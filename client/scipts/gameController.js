@@ -59,9 +59,8 @@ function updateUI(){
 function handleSong(game){
     var songToPlay = getSongURL(game);
 
-    //Don't restart the song if it's still the same song!
-    console.log(songToPlay + " vs " + currentlyPlayingUrl);
-    if(songToPlay != currentlyPlayingUrl) {
+    //Don't restart the song if it's still the same song!    
+    if(game.gameStarted && songToPlay != currentlyPlayingUrl) {
       console.log("Changing song!");
       currentlyPlayingUrl = songToPlay;
       Session.set('songIndex', game.currentSong);
