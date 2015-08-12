@@ -11,7 +11,7 @@ Meteor.methods({
         });
         
         console.log(songPreviewURLs);        
-        var id = Games.insert({gameName: gameName, currentSong: 0, players: [], songs: songPreviewURLs, answer: "...", gameStarted:false});
+        var id = Games.insert({gameName: gameName, currentSong: 0, players: [], songs: songPreviewURLs, textsToShow:city.texts, answer: "...", gameStarted:false});
         cityName = cityName.trim().toLowerCase();
         Answers.insert({gameId: id, city: cityName});        
         return id;
