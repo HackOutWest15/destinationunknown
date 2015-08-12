@@ -1,18 +1,30 @@
 var song;
 var currentlyPlayingUrl;
 
+Session.setDefault("gameName", "");
+Session.setDefault("trivia", "TRIVIA");
 Session.setDefault('infoText', "Now Playing");
 Session.setDefault('songIndex', 0);
 Session.setDefault('playerOne', {name: "-", stoppedAt: "", answer: null, guess: null});
 Session.setDefault('playerTwo', {name: "-", stoppedAt: "", answer: null, guess: null});
 Template.activeGame.created = function(){
+        $('body').on('keydown',function(event) {
+            if(event.keyCode == 32 && $("#answerButton").is(":visible")){
+                console.log(event.keyCode + "and "+$("#answerButton").is(":visible"));
+                showAnswerModal();
+            }
+        });
+
+
     this.autorun(function(){
         console.log("autorun");
         var gameId = Session.get("gameId");
         var game = Games.find({_id: gameId}).fetch()[0];
+
         //console.log("SessionId: " + gameId + " , Game: " + game);
 
         if(game){
+            Session.set("gameName", game.gameName.toUpperCase());
             if(game.currentSong === -1){
                 endGame(game);
                 console.log("ENDGAME!")
@@ -40,12 +52,20 @@ Template.activeGame.helpers({
   },
   infoText: function(){
       return Session.get("infoText")
+  },
+  gameName: function(){
+      return Session.get("gameName");
+  },
+  trivia: function(){
+      return Session.get("trivia")
   }
 });
 
 Template.activeGame.rendered = function() {
 	console.log('activeGameRendered');
+
 };
+
 
 Meteor.subscribe('games', function(){
     console.log("INIT!");
@@ -64,6 +84,7 @@ function handleSong(game){
       console.log("Changing song!");
       currentlyPlayingUrl = songToPlay;
       Session.set('songIndex', game.currentSong);
+      Session.set("trivia", game.textsToShow[game.currentSong]);
       updateUI();
       if(song){
           song.pause();
@@ -99,43 +120,61 @@ function endGame(game){
     playerOne = game.players[0];
     playerTwo = game.players[1];
     console.log("it's a TIE");
-    var infoResult = "We were going to " + game.answer.toUpperCase() +"\n\n\n";
-    var appendString = "It's a tie!";
+    var answerString = "We were going to " + game.answer.toUpperCase() +"\n\n\n";
+    var resultString = "It's a tie!";
     if(playerOne.score[0].score !== playerTwo.score[0].score){
-        appendString = playerOne.score[0].score > playerTwo.score[0].score ? playerOne.name + " wins!" : playerTwo.name + " wins!"
+        resultString = playerOne.score[0].score > playerTwo.score[0].score ? playerOne.name + " wins!" : playerTwo.name + " wins!"
     }
-    infoResult += appendString;
     console.log("It's the end result: ---")
     console.log(playerOne)
     Session.set("playerOne", {name: playerOne.name, stoppedAt: playerOne.score[0].stoppedAt,
         score: playerOne.score[0].score, guess: playerOne.score[0].guess})
     Session.set("playerTwo", {name: playerTwo.name, stoppedAt: playerTwo.score[0].stoppedAt,
         score: playerTwo.score[0].score, guess: playerTwo.score[0].guess})
-    Session.set("infoText", infoResult);
+    Session.set("infoText", answerString);
+    Session.set("trivia", resultString);
     var answerButton = document.getElementById('answerButton');
     answerButton.style.display = 'none';
     var leaveButton = document.getElementById('leaveButton');
     leaveButton.style.display = 'inline';
+    var forfeitButton = document.getElementById('forfeitButton');
+    forfeitButton.style.display = "none";
 }
 
+function showAnswerModal(){
+    $("#gameModal").show();
+    $(".container").addClass("blurred");
 
+}
 
 Template.activeGame.events({
     'click #answerButton': function () {
-        $("#gameModal").show();
-        $(".container").addClass("blurred");
+        showAnswerModal();
     },
     'click #modalAnswer': function () {
-        var answer = $('#answerInput').val();
-        console.log(answer);
-
-        Meteor.call("checkAnswer", Session.get("gameId"), answer);
-
-        $(".container").removeClass("blurred");
-        $("#gameModal").hide();
+        checkAnswer();
     }
 });
 
+Template.answerModal.created = function() {
+    $('body').on('keydown', function (event) {
+        console.log(event.keyCode + "and " + $("#answerButton").is(":visible"));
+        if (event.keyCode == 13 && $("#modalAnswer").is(":visible")) {
+            console.log(event.keyCode + "and " + $("#answerButton").is(":visible"));
+            checkAnswer();
+        }
+    });
+};
+
+function checkAnswer(){
+    var answer = $('#answerInput').val();
+    console.log(answer);
+
+    Meteor.call("checkAnswer", Session.get("gameId"), answer);
+
+    $(".container").removeClass("blurred");
+    $("#gameModal").hide();
+}
 Template.answerModal.events({
     'click .hide-modal' : function(){
         $("#gameModal").hide();
@@ -153,6 +192,17 @@ Template.answerModal.events({
 
 Template.activeGame.events({
     'click #leaveButton': function () {
-        Router.go('lobby');
+        Router.go('/');
+    }
+});
+
+Template.activeGame.events({
+    'click #forfeitButton': function () {
+        var gameId = Session.get("gameId");
+        var numberOfPlayers = Games.findOne({_id: gameId}).players.length;
+        if(numberOfPlayers < 2) {
+            Router.go('/');
+            Games.remove({_id: gameId});
+        }
     }
 })

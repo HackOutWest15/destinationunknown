@@ -13,7 +13,7 @@ getCity = function(cityName) {
     }
   } else {
     var newCity = updateCity(cityName);
-    Cities.insert(newCity);
+    Cities.insert(newCity);    
     console.log("Inserted city: " + cityName);
     return newCity;
   }
@@ -23,7 +23,30 @@ function updateCity(cityName) {
   var artists = getArtistsForCity(cityName);
   var test = sortedArtists(artists);
   test = appendSongDataToArtists(test);
-  return {name: cityName, artists: test, updatedDate: new Date()};
+  var text = getTextsForCity(cityName);
+  return {name: cityName, artists: test, texts:text, updatedDate: new Date()};
+}
+
+function getTextsForCity(cityName) {
+  var result = Meteor.http.call("GET", "https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&titles="+cityName+"");
+  var jsonContent = JSON.parse(result.content);
+  var keys = Object.keys(jsonContent);
+  var pages = jsonContent.query.pages;
+  var mypage = pages[Object.keys(pages)[0]];
+  var extract = mypage.extract
+  var replaced = replaceAll(cityName, "X", extract);
+
+  var list = replaced.split(/[\n.]+/).slice(0,8).reverse();
+  list.unshift("", "");  
+
+  console.log(list);
+  console.log(list.length);
+
+  return list;
+}
+
+function replaceAll(find, replace, str) {
+  return str.replace(new RegExp(find, 'g'), replace);
 }
 
 // Returns a list of Artists (id, name) that belong to the specified city
