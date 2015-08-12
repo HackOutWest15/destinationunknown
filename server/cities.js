@@ -30,7 +30,8 @@ availableCities = [
 {cityName: "Seattle", wikiName:"Seattle" },
 {cityName: "Sheffield", wikiName:"Sheffield" },
 {cityName: "Stockholm", wikiName:"Stockholm" },
+{cityName: "Sydney", wikiName:"Sydney" },
 {cityName: "Tokyo", wikiName:"Tokyo" }
 ];
 
-//availableCities = [ {cityName: "Charlotte", wikiName:"Charlotte,_North_Carolina" }, ];
+//availableCities = [ {cityName: "Sydney", wikiName:"Sydney" }, ];
