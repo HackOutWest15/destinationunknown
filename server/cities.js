@@ -1,10 +1,11 @@
 availableCities = [
 {cityName: "Athens+ga",  wikiName:"Athens,_Georgia" },
 {cityName: "Atlanta", wikiName:"Atlanta" },
-{cityName: "Austin", wikiName:"Austin" },
+{cityName: "Austin", wikiName:"Austin,_Texas" },
 {cityName: "Berlin",  wikiName:"Berlin" },
 {cityName: "Berkeley",  wikiName:"Berkeley,_California" },
 {cityName: "Birmingham", wikiName:"Birmingham" },
+{cityName: "Borlange", wikiName:"Borlänge" },
 {cityName: "Boston", wikiName:"Boston" },
 {cityName: "Bristol", wikiName:"Bristol" },
 {cityName: "Charlotte", wikiName:"Charlotte,_North_Carolina" },
@@ -34,4 +35,4 @@ availableCities = [
 {cityName: "Tokyo", wikiName:"Tokyo" }
 ];
 
-//availableCities = [ {cityName: "Sydney", wikiName:"Sydney" }, ];
+//availableCities = [ {cityName: "Borlange", wikiName:"Borlänge" },];

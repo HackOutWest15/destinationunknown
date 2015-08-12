@@ -129,7 +129,7 @@ function endGame(game){
     var leaveButton = document.getElementById('leaveButton');
     leaveButton.style.display = 'inline';
     var forfeitButton = document.getElementById('forfeitButton');
-    forfeitButton.style.display = "none";
+    forfeitButton.style.display = "none"
 }
 
 function showAnswerModal(){
@@ -185,9 +185,12 @@ Template.activeGame.events({
     'click #forfeitButton': function () {
         var gameId = Session.get("gameId");
         var numberOfPlayers = Games.findOne({_id: gameId}).players.length;
+        //console.log(numberOfPlayers);
         if(numberOfPlayers < 2) {
             Router.go('/');
             Games.remove({_id: gameId});
+        } else {
+            Router.go('/');
         }
     }
 })
