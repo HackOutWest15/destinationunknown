@@ -1,6 +1,23 @@
+Template.lobby.rendered = function() {
+    //new untested and stronk
+    this.autorun(function(){
+        console.log("autorun2");
+        if(Meteor.userId() && !Meteor.loggingIn()){
+            console.log(Meteor.userId());
+            $("#createNewGameButton").show();
+            $("#welcome-text").hide();
+        } else {
+            $("#createNewGameButton").hide();
+            $("#welcome-text").show();
+        }
+    });
+}
+
 Template.lobby.events({
-    'click #answerButton': function () {
-    	console.log("hiihi");
+    'click #closeModal': function () {
+        $("#createModal").hide();
+    },
+    'click #createNewGameButton': function () {
         $("#createModal").show();
     },
     'click #createGameName': function () {
@@ -20,10 +37,6 @@ Template.lobby.events({
 		        _GameId: result	
 	        });
 	    });
-    },
-    'click .lobby-cards': function(){
-    	console.log("dssd");
-    	console.log(JSON.stringify(this));
     }
 });
 

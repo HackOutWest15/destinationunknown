@@ -6,6 +6,14 @@ Session.setDefault('songIndex', 0);
 Session.setDefault('playerOne', {name: "-", stoppedAt: "", answer: null, guess: null});
 Session.setDefault('playerTwo', {name: "-", stoppedAt: "", answer: null, guess: null});
 Template.activeGame.created = function(){
+        $('body').on('keydown',function(event) {
+            if(event.keyCode == 32 && $("#answerButton").is(":visible")){
+                console.log(event.keyCode + "and "+$("#answerButton").is(":visible"));
+                showAnswerModal();
+            }
+        });
+
+
     this.autorun(function(){
         console.log("autorun");
         var gameId = Session.get("gameId");
@@ -45,7 +53,9 @@ Template.activeGame.helpers({
 
 Template.activeGame.rendered = function() {
 	console.log('activeGameRendered');
+
 };
+
 
 Meteor.subscribe('games', function(){
     console.log("INIT!");
@@ -118,24 +128,40 @@ function endGame(game){
     leaveButton.style.display = 'inline';
 }
 
+function showAnswerModal(){
+    $("#gameModal").show();
+    $(".container").addClass("blurred");
 
+}
 
 Template.activeGame.events({
     'click #answerButton': function () {
-        $("#gameModal").show();
-        $(".container").addClass("blurred");
+        showAnswerModal();
     },
     'click #modalAnswer': function () {
-        var answer = $('#answerInput').val();
-        console.log(answer);
-
-        Meteor.call("checkAnswer", Session.get("gameId"), answer);
-
-        $(".container").removeClass("blurred");
-        $("#gameModal").hide();
+        checkAnswer();
     }
 });
 
+Template.answerModal.created = function() {
+    $('body').on('keydown', function (event) {
+        console.log(event.keyCode + "and " + $("#answerButton").is(":visible"));
+        if (event.keyCode == 13 && $("#modalAnswer").is(":visible")) {
+            console.log(event.keyCode + "and " + $("#answerButton").is(":visible"));
+            checkAnswer();
+        }
+    });
+};
+
+function checkAnswer(){
+    var answer = $('#answerInput').val();
+    console.log(answer);
+
+    Meteor.call("checkAnswer", Session.get("gameId"), answer);
+
+    $(".container").removeClass("blurred");
+    $("#gameModal").hide();
+}
 Template.answerModal.events({
     'click .hide-modal' : function(){
         $("#gameModal").hide();

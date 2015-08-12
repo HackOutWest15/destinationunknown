@@ -10,7 +10,4 @@
   });
   console.log('yo');
 
-  Router.route('/lobby', {template:'lobby'});  
-  Router.route('/', {template:'login'});    
-
-
+  Router.route('/', {template:'lobby'});    
