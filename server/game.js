@@ -1,18 +1,18 @@
 Meteor.methods({
     createGame: function(gameName) {
-        var cityName = availableCities[Math.floor(Math.random() * availableCities.length)];
-        console.log(gameName + " has answer " + cityName);
-        var city = getCity(cityName);
+        var cityData = availableCities[Math.floor(Math.random() * availableCities.length)];
+        console.log(gameName + " has answer " + cityData.cityName);
+        var city = getCity(cityData);
         var artists = city.artists;
 
         var songs = [];
         artists.forEach(function(entry) {
-            songs.push({artist: entry.name, track: entry.songs[0].title, url: entry.songs[0].preview_url, spotify: entry.songs[0].external_urls.spotify});
+            songs.push({artist: entry.name, track: entry.songs[0].name, url: entry.songs[0].preview_url, spotify: entry.songs[0].external_urls.spotify});
         });
         
         console.log(songs);        
         var id = Games.insert({gameName: gameName, currentSong: 0, players: [], songs: songs, textsToShow:city.texts, answer: "...", gameStarted:false});
-        cityName = cityName.trim().toLowerCase();
+        cityName = cityData.cityName.trim().toLowerCase();
         Answers.insert({gameId: id, city: cityName});        
         return id;
     }

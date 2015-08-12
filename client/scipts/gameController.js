@@ -1,33 +1,30 @@
 var song;
 var currentlyPlayingUrl;
 
-Session.setDefault("gameName", "");
-Session.setDefault("trivia", "TRIVIA");
-Session.setDefault('infoText', "Now Playing");
-Session.setDefault('songIndex', 0);
-Session.setDefault('playerOne', {name: "-", stoppedAt: "", answer: null, guess: null});
-Session.setDefault('playerTwo', {name: "-", stoppedAt: "", answer: null, guess: null});
 Template.activeGame.created = function(){
-        $('body').on('keydown',function(event) {
+    Session.setDefault("gameName", "");
+    Session.setDefault("trivia", "TRIVIA");
+    Session.setDefault('infoText', "Now Playing");
+    Session.setDefault('songIndex', 0);
+    Session.setDefault('playerOne', {name: "-", stoppedAt: "", answer: null, guess: null});
+    Session.setDefault('playerTwo', {name: "-", stoppedAt: "", answer: null, guess: null});
+    Session.setDefault("artistAndSongs", null);
+    $('body').on('keydown',function(event) {
             if(event.keyCode == 32 && $("#answerButton").is(":visible")){
-                console.log(event.keyCode + "and "+$("#answerButton").is(":visible"));
                 showAnswerModal();
             }
         });
 
 
     this.autorun(function(){
-        console.log("autorun");
         var gameId = Session.get("gameId");
         var game = Games.find({_id: gameId}).fetch()[0];
 
-        //console.log("SessionId: " + gameId + " , Game: " + game);
 
         if(game){
             Session.set("gameName", game.gameName.toUpperCase());
             if(game.currentSong === -1){
                 endGame(game);
-                console.log("ENDGAME!")
             } else {
                 handleSong(game);
                 updatePlayersStatus(game);
@@ -37,14 +34,12 @@ Template.activeGame.created = function(){
 };
 Template.activeGame.helpers({
   songScore: function() {
-  	console.log("songind: "+Session.get('songIndex'));
   	if(Session.get('songIndex') >=0){
   		return 10-Session.get('songIndex');
   	}
   	return 10;
   },
   playerOne: function(){
-      console.log(Session.get("playerOne"))
       return Session.get("playerOne")
   },
   playerTwo: function(){
@@ -58,17 +53,18 @@ Template.activeGame.helpers({
   },
   trivia: function(){
       return Session.get("trivia")
+  },
+  artistAndSongs: function(){
+      return Session.get("artistAndSongs")
   }
 });
 
 Template.activeGame.rendered = function() {
-	console.log('activeGameRendered');
 
 };
 
 
 Meteor.subscribe('games', function(){
-    console.log("INIT!");
 
 });
 
@@ -81,7 +77,6 @@ function handleSong(game){
 
     //Don't restart the song if it's still the same song!    
     if(game.gameStarted && songToPlay != currentlyPlayingUrl) {
-      console.log("Changing song!");
       currentlyPlayingUrl = songToPlay;
       Session.set('songIndex', game.currentSong);
       Session.set("trivia", game.textsToShow[game.currentSong]);
@@ -93,11 +88,10 @@ function handleSong(game){
     }
 }
 function getSongURL(game){
-	return game.songs[game.currentSong];
+	return game.songs[game.currentSong].url;
 }
 
 function playSong(url) {
-    console.log("playing songURL: "+url);
 	song = new Audio(url);
 	song.play();
 }
@@ -105,7 +99,6 @@ function playSong(url) {
 function updatePlayersStatus(game){
     var playerOne = game.players[0];
     var playerTwo = game.players[1];
-    console.log("we are within the updatePlayerStatus");
     if(playerOne){
         Session.set("playerOne", {name: playerOne.name, stoppedAt: playerOne.score[0] ? playerOne.score[0].stoppedAt : "",
             score: null, guess : null})
@@ -119,20 +112,18 @@ function updatePlayersStatus(game){
 function endGame(game){
     playerOne = game.players[0];
     playerTwo = game.players[1];
-    console.log("it's a TIE");
     var answerString = "We were going to " + game.answer.toUpperCase() +"\n\n\n";
     var resultString = "It's a tie!";
     if(playerOne.score[0].score !== playerTwo.score[0].score){
         resultString = playerOne.score[0].score > playerTwo.score[0].score ? playerOne.name + " wins!" : playerTwo.name + " wins!"
     }
-    console.log("It's the end result: ---")
-    console.log(playerOne)
     Session.set("playerOne", {name: playerOne.name, stoppedAt: playerOne.score[0].stoppedAt,
         score: playerOne.score[0].score, guess: playerOne.score[0].guess})
     Session.set("playerTwo", {name: playerTwo.name, stoppedAt: playerTwo.score[0].stoppedAt,
         score: playerTwo.score[0].score, guess: playerTwo.score[0].guess})
     Session.set("infoText", answerString);
     Session.set("trivia", resultString);
+    Session.set("artistAndSongs", game.songs);
     var answerButton = document.getElementById('answerButton');
     answerButton.style.display = 'none';
     var leaveButton = document.getElementById('leaveButton');
@@ -158,9 +149,7 @@ Template.activeGame.events({
 
 Template.answerModal.created = function() {
     $('body').on('keydown', function (event) {
-        console.log(event.keyCode + "and " + $("#answerButton").is(":visible"));
         if (event.keyCode == 13 && $("#modalAnswer").is(":visible")) {
-            console.log(event.keyCode + "and " + $("#answerButton").is(":visible"));
             checkAnswer();
         }
     });
@@ -168,7 +157,6 @@ Template.answerModal.created = function() {
 
 function checkAnswer(){
     var answer = $('#answerInput').val();
-    console.log(answer);
 
     Meteor.call("checkAnswer", Session.get("gameId"), answer);
 
@@ -178,14 +166,11 @@ function checkAnswer(){
 Template.answerModal.events({
     'click .hide-modal' : function(){
         $("#gameModal").hide();
-        console.log("closed");
     },
     'click .hide-modal' : function(){
         $("#gameModal").hide();
-        console.log("closed");
     },
     'click #createGame' : function(){
-        console.log('clickcreate');
         Router.go('game');
     }
 });
