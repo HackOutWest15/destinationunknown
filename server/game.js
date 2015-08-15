@@ -13,7 +13,7 @@ Meteor.methods({
         console.log(songs);        
         var id = Games.insert({gameName: gameName, currentSong: 0, players: [], songs: songs, textsToShow:city.texts, answer: "...", gameStarted:false});
         cityName = cityData.cityName.trim().toLowerCase();
-        Answers.insert({gameId: id, city: cityName});        
+        Answers.insert({gameId: id, city: cityName.split("+")[0]});        
         return id;
     }
 });
