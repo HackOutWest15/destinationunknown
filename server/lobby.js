@@ -1,6 +1,13 @@
 Meteor.methods({
     joinGame: function(gameId) {
-        var player = {playerId: Meteor.userId(), name: Meteor.user().profile.name, score: [
+        var name = "Unknown user";
+        if(Meteor.user().profile) {
+            name = Meteor.user().profile.name; 
+        } else {
+            var name = Meteor.user().username;    
+        }
+        
+        var player = {playerId: Meteor.userId(), name: name , score: [
         	{stoppedAt:0, score:0, guess:"No guess"}]};
             
         var game = Games.findOne({_id:gameId});
