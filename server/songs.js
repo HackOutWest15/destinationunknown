@@ -41,7 +41,7 @@ function getTextsForCity(cityData) {
   var mypage = pages[Object.keys(pages)[0]];
   var extract = mypage.extract
   extract = replaceAll("U.S.", "U.S", extract);
-  var replaced = replaceAll(cityName, "X", extract);
+  var replaced = replaceAll(cityName.split("+")[0], "X", extract);
   var replaced = replaceAll(wikiName, "X", replaced);
 
   var list = replaced.split(/\n|(\. )/).filter(function(e) {
