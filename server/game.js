@@ -3,11 +3,10 @@ Meteor.methods({
         var cityData = availableCities[Math.floor(Math.random() * availableCities.length)];
         console.log(gameName + " has answer " + cityData.cityName);
         var city = getCity(cityData);
-        var artists = city.artists.splice(0,10);
+        var artists = city.artists;
 
         var songs = [];
-        artists.forEach(function(entry) {
-            console.log("Handling artist: " + JSON.stringify(entry));
+        artists.forEach(function(entry) {            
 
             songs.push({artist: entry.name, track: entry.songs[0].name, url: entry.songs[0].preview_url, spotify: entry.songs[0].external_urls.spotify});
         });

@@ -42,6 +42,7 @@ function getTextsForCity(cityData) {
   var extract = mypage.extract
   extract = replaceAll("U.S.", "U.S", extract);
   extract = replaceAll("St.", "St", extract);
+  extract = replaceAll("Mt.", "Mt", extract);
   var replaced = replaceAll(cityName.split("+")[0], "X", extract);
   var replaced = replaceAll(wikiName, "X", replaced);
 
@@ -51,10 +52,7 @@ function getTextsForCity(cityData) {
   
   while(list.length < 10) {
     list.unshift("");
-  }
-
-  console.log(list);
-  console.log(list.length);
+  }  
 
   return list;
 }
@@ -78,7 +76,6 @@ function appendSongDataToArtists(artists)
   for(i = 0; i < artists.length ; i++)
   {
       var spotifyId = artists[i].foreign_ids[0].foreign_id.split(":")[2];
-      console.log("Artist " + artists[i].name + " has id " + spotifyId);
       artists[i].songs = getSongsForSpotifyArtistId(spotifyId);
       if(artists[i].songs && artists[i].songs.length > 0) {
         returnArtists.push(artists[i]);
@@ -92,7 +89,6 @@ function appendSongDataToArtists(artists)
 function getSongsForSpotifyArtistId(artistId)
 {  
   var result = Meteor.http.call("GET", "https://api.spotify.com/v1/artists/"+artistId+"/top-tracks?country=SE");  
-  console.log("tracks: " + result.data.tracks);
   return result.data.tracks;
 }
 
