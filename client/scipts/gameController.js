@@ -4,14 +4,14 @@ var currentlyPlayingUrl;
 Template.activeGame.created = function(){
     Session.setDefault("gameName", "");
     Session.setDefault("trivia", "TRIVIA");
-    Session.setDefault('infoText', "Now Playing");
+    Session.setDefault('infoText', "Waiting for players");
     Session.setDefault('songIndex', 0);
     Session.setDefault('playerOne', {name: "-", stoppedAt: "", answer: null, guess: null});
     Session.setDefault('playerTwo', {name: "-", stoppedAt: "", answer: null, guess: null});
     Session.setDefault("artistAndSongs", null);
     Session.set("gameName", "");
     Session.set("trivia", "TRIVIA");
-    Session.set('infoText', "Now Playing");
+    Session.set('infoText', "Waiting for players");
     Session.set('songIndex', 0);
     Session.set('playerOne', {name: "-", stoppedAt: "", answer: null, guess: null});
     Session.set('playerTwo', {name: "-", stoppedAt: "", answer: null, guess: null});
@@ -29,6 +29,9 @@ Template.activeGame.created = function(){
 
 
         if(game){
+            if(game.gameStarted) {
+              Session.set('infoText', "Now playing");
+            }
             Session.set("gameName", game.gameName.toUpperCase());
             if(game.currentSong === -1){
                 endGame(game);
