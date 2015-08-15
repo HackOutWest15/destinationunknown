@@ -41,6 +41,7 @@ function getTextsForCity(cityData) {
   var mypage = pages[Object.keys(pages)[0]];
   var extract = mypage.extract
   extract = replaceAll("U.S.", "U.S", extract);
+  extract = replaceAll("St.", "St", extract);
   var replaced = replaceAll(cityName.split("+")[0], "X", extract);
   var replaced = replaceAll(wikiName, "X", replaced);
 
@@ -65,18 +66,25 @@ function replaceAll(find, replace, str) {
 // Returns a list of Artists (id, name) that belong to the specified city
 // ( [{name, id},{name, id} ...] )
 function getArtistsForCity(city) {
-  var result = Meteor.http.call("GET", "http://developer.echonest.com/api/v4/artist/search?api_key=" + api_key + "&format=json&artist_location="+city+"&results=10&bucket=id:spotify&bucket=familiarity");
+  var call = "http://developer.echonest.com/api/v4/artist/search?api_key=" + api_key + "&format=json&artist_location="+city+"&results=20&bucket=id:spotify&bucket=familiarity";
+  console.log("Calling: " + call);
+  var result = Meteor.http.call("GET", call);
   return result.data.response.artists;
 }
 
 function appendSongDataToArtists(artists)
 {
+  var returnArtists = [];
   for(i = 0; i < artists.length ; i++)
   {
       var spotifyId = artists[i].foreign_ids[0].foreign_id.split(":")[2];
+      console.log("Artist " + artists[i].name + " has id " + spotifyId);
       artists[i].songs = getSongsForSpotifyArtistId(spotifyId);
+      if(artists[i].songs && artists[i].songs.length > 0) {
+        returnArtists.push(artists[i]);
+      }
   }
-  return artists;
+  return returnArtists.slice(Math.max(returnArtists.length - 10, 1))
 }
 
 // This gets the most popular tracks for a given artist. The retun data contains everything spotify knows about the track.
@@ -84,6 +92,7 @@ function appendSongDataToArtists(artists)
 function getSongsForSpotifyArtistId(artistId)
 {  
   var result = Meteor.http.call("GET", "https://api.spotify.com/v1/artists/"+artistId+"/top-tracks?country=SE");  
+  console.log("tracks: " + result.data.tracks);
   return result.data.tracks;
 }
 
