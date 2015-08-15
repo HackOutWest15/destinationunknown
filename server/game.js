@@ -7,8 +7,8 @@ Meteor.methods({
 
         var songs = [];
         artists.forEach(function(entry) {            
-
-            songs.push({artist: entry.name, track: entry.songs[0].name, url: entry.songs[0].preview_url, spotify: entry.songs[0].external_urls.spotify});
+            var songToPlay = Math.floor(Math.random()*entry.songs.length) % 5;
+            songs.push({artist: entry.name, track: entry.songs[songToPlay].name, url: entry.songs[songToPlay].preview_url, spotify: entry.songs[songToPlay].external_urls.spotify});
         });
         
         console.log(songs);        
