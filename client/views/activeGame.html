@@ -3,7 +3,7 @@
 		<div class="jumbotron container-fluid">
             <div class="col-md-12 text-center"><h2>{{gameName}}</h2></div>
             <div class="col-md-12 text-center"><h3>Where are we going?</h3></div>
-	        <div class="jumbotron player first-player col-md-4">
+	        <div class="jumbotron player first-player col-md-4 col-xs-12">
                 <h3>{{playerOne.name}}</h3>
 
                 Guessed at:
@@ -19,11 +19,11 @@
                     <h2>CORRECT!</h2>
                 {{/if}}
             </div>
-            <div class="col-md-4 now-playing"><h3>{{infoText}}</h3>
+            <div class="col-md-4 col-xs-12 now-playing"><h3>{{infoText}}</h3>
                 <br>
                 {{songScore}} Points
             </div>
-            <div class="jumbotron player second-player col-md-4">
+            <div class="jumbotron player second-player col-md-4 col-xs-12">
                 <h3>{{playerTwo.name}}</h3>
 
                 Guessed at:
@@ -40,7 +40,7 @@
                     <h2>CORRECT!</h2>
                 {{/if}}
             </div>
-            <div class="col-md-12 text-center trivia" style="font-family: 'Shadows Into Light', cursive;">
+            <div class="col-md-12 col-xs-12 text-center trivia" style="font-family: 'Shadows Into Light', cursive;">
                 <i><h2>{{trivia}}</h2></i>
             </div>
             <div class="col-md-12 text-center trivia" >
@@ -53,20 +53,20 @@
                     {{/each}}
                 </ol>
             </div>
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-8 col-md-offset-2 col-xs-12">
                 <div class="progress">
                     <div class="progress-bar progress-bar-success progress-bar-striped" id="gameProgress" role="progressbar" aria-valuenow="1" aria-valuemin="0" aria-valuemax="10" style="width: 0%">
                         <span class="sr-only">40% Complete (success)</span>
                     </div>
                 </div>
             </div>
-            <div class="col-md-12 answer-button">
-                <div class="col-md-9">
+            <div class="col-md-12 col-xs-12 answer-button">
+                <div class="col-md-9 col-xs-6">
                     <button id="answerButton" class="btn btn-success col-md-offset-4 btn-lg">I KNOW!</button>
                     <button id="leaveButton" class="btn btn-success col-md-offset-4 btn-lg" style="display: none;">Back to lobby! </button>
                 </div>
-                <div class="col-md-3">
-                    <button id="forfeitButton" class="btn btn-warning btn-lg pull-right">Forfeit!</button>                    
+                <div class="col-md-3 col-xs-6">
+                    <button id="forfeitButton" class="btn btn-danger btn-lg">FORFEIT!</button>
                 </div>
             </div>
 	    </div>

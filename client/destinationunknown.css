@@ -187,16 +187,7 @@ body {
 .navbar {
     background-color: black;
 }
-@media (min-width: 768px) {
-    .navbar{
-        background-color: black;
-        font-size: 1.2em;
-    }
 
-    .navbar-brand{
-        font-size: 1.6em;
-    }
-}
 
 #login-dropdown-list{
     margin-top: 2%;
@@ -239,4 +230,26 @@ a:active {
 
 p.login-buttons-navbar{
     margin-top: 13px;
+}
+
+@media (min-width: 768px) {
+    .navbar{
+        background-color: black;
+        font-size: 1.2em;
+    }
+
+    .now-playing{
+        margin-bottom: 5%;
+    }
+    .navbar-brand{
+        font-size: 1.6em;
+    }
+
+
+}
+
+@media (min-width: 992px) {
+    #forfeitButton{
+        float: right !important;
+    }
 }
