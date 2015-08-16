@@ -1,0 +1,28 @@
+<template name="headerTemplate">
+    <div class="navbar navbar-inverse navbar-static-top" role="navigation">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">Destination Unknown</a>
+            <button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <div class="collapse navbar-collapse navHeaderCollapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    <li>
+                        <a href="/about">About</a><!--{{>helpTemplate}} ALSO ADD INFORMATION ABOUT ECHONEST AND SPOITFY IN HELPTEMPLATE> -->
+                    </li>
+                    <li>
+                        <!--<div class="header-login col-md-2">{{>loginButtons}}</div>-->
+                        <p class="navbar-text">{{>loginButtons}}</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+</template>

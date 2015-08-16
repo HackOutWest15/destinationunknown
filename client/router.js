@@ -10,7 +10,8 @@ Router.route('/game', {
     }
 });
 
-Router.route('/', {template:'lobby', path:'/'});    
+Router.route('/', {template:'lobby', path:'/'});
+Router.route('/about', {template:'aboutTemplate', path:'/about'});
 
 Router.configure({ notFoundTemplate: 'lobby'})
 

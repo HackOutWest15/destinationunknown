@@ -1,7 +1,7 @@
 /* CSS declarations go here */
 body {
     background-image: url("/img/background.jpg");
-    background-repeat: no-repeat;
+    background-repeat: repeat-y;
     background-size: cover;
     position: absolute;
     top: 0;
@@ -11,21 +11,6 @@ body {
     font-family: 'Bree Serif', serif;
 }
 
-header {
-    margin-top: 0;
-    background-color: #000000;
-    color: #ffffff;
-    height: 70px;
-    text-align: center;
-    vertical-align: middle;
-    font-size: xx-large;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 100;
-
-}
 
 .header-login {
     font-size: 18px;
@@ -42,7 +27,6 @@ header {
 }
 
 .container {
-    margin-top: 75px;
     height: 100%;
 }
 
@@ -198,4 +182,57 @@ header {
     width:100%;
     background: black;
     color: white;
+}
+
+.navbar {
+    background-color: black;
+}
+@media (min-width: 768px) {
+    .navbar{
+        background-color: black;
+        font-size: 1.2em;
+    }
+
+    .navbar-brand{
+        font-size: 1.6em;
+    }
+}
+
+#login-dropdown-list{
+    margin-top: 2%;
+    position: relative;
+    background-color: black;
+    color: white;
+}
+
+.accounts-dialog{
+    border: none;
+    width: auto;
+}
+
+#login-name-link, #login-sign-in-link{
+    color: white;
+    text-decoration: none !important;
+    line-height: 20px;
+    padding-left: 15px;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a:active {
+    text-decoration: underline;
+}
+
+#login-username, #login-password{
+    color: black;
 }
