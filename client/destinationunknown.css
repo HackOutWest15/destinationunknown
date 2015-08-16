@@ -78,6 +78,7 @@ body {
     height: 30%;
     text-align: center;
     margin-top: 5%;
+    margin-bottom: 5%;
 }
 
 .answer-button {
@@ -238,9 +239,6 @@ p.login-buttons-navbar{
         font-size: 1.2em;
     }
 
-    .now-playing{
-        margin-bottom: 5%;
-    }
     .navbar-brand{
         font-size: 1.6em;
     }
