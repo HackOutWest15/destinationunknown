@@ -236,3 +236,7 @@ a:active {
 #login-username, #login-password, #login-password-again{
     color: black;
 }
+
+p.login-buttons-navbar{
+    margin-top: 13px;
+}
