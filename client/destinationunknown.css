@@ -233,6 +233,6 @@ a:active {
     text-decoration: underline;
 }
 
-#login-username, #login-password{
+#login-username, #login-password, #login-password-again{
     color: black;
 }
