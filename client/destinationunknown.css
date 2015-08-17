@@ -2,7 +2,7 @@
 body {
     background-image: url("/img/background.jpg");
     background-repeat: repeat-y;
-    background-size: cover;
+    background-size: auto;
     position: absolute;
     top: 0;
     left: 0;
@@ -256,5 +256,8 @@ p.login-buttons-navbar{
     }
     .now-playing{
         margin-top: 5%;
+    }
+    body{
+        background-size: cover;
     }
 }
