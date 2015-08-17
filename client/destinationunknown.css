@@ -186,6 +186,11 @@ body {
 
 .navbar {
     background-color: black;
+    font-size: 1.6em;
+}
+
+.navbar-brand{
+    font-size: 1.4em;
 }
 
 
@@ -236,6 +241,7 @@ p.login-buttons-navbar{
     .navbar{
         background-color: black;
         font-size: 1.2em;
+
     }
 
     .navbar-brand{
