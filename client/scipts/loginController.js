@@ -10,10 +10,3 @@ Template.helpTemplate.events({
 	}
 });
 
-Template.helpModal.events({
-	'click #modalDone': function() {
-		console.log("fewo")
-		$("#helpModal").hide();
-		$(".container").removeClass("blurred");
-	}
-});

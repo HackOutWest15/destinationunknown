@@ -1,4 +1,4 @@
-var song;
+var song = new Audio();
 var currentlyPlayingUrl;
 
 Template.activeGame.created = function(){
@@ -42,6 +42,11 @@ Template.activeGame.created = function(){
         }
     });
 };
+Template.activeGame.onDestroyed(function () {
+    if(song){
+        song.pause();
+    }
+});
 Template.activeGame.helpers({
   songScore: function() {
   	if(Session.get('songIndex') >=0){
@@ -70,7 +75,9 @@ Template.activeGame.helpers({
 });
 
 Template.activeGame.rendered = function() {
-
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
+        $("#unmute-div").show();
+    }
 };
 
 
@@ -102,7 +109,7 @@ function getSongURL(game){
 }
 
 function playSong(url) {
-	song = new Audio(url);
+	song.src=url;
 	song.play();
 }
 
@@ -154,6 +161,12 @@ Template.activeGame.events({
     },
     'click #modalAnswer': function () {
         checkAnswer();
+    },
+    'click #unmute-button': function () {
+      if(song){
+          song.play();
+          $("#unmute-div").hide();
+      }
     }
 });
 

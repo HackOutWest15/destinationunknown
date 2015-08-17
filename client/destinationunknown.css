@@ -77,7 +77,6 @@ body {
 .now-playing{
     height: 30%;
     text-align: center;
-    margin-top: 5%;
     margin-bottom: 5%;
 }
 
@@ -243,11 +242,13 @@ p.login-buttons-navbar{
         font-size: 1.6em;
     }
 
-
 }
 
 @media (min-width: 992px) {
     #forfeitButton{
         float: right !important;
+    }
+    .now-playing{
+        margin-top: 5%;
     }
 }
